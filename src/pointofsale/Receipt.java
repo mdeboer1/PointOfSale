@@ -10,5 +10,18 @@ package pointofsale;
  * @author mdeboer1
  */
 public class Receipt {
+    //Static variable to count number of objects created, to be used for receiptNumber property
+    public static int receiptNumberIncrementer = 1;
+    private final int receiptNumber;
+    
+    public Receipt(){
+        receiptNumber = receiptNumberIncrementer;
+        receiptNumberIncrementer++;
+    }
+
+    public int getReceiptNumber() {
+        return receiptNumber;
+    }
+    
     
 }

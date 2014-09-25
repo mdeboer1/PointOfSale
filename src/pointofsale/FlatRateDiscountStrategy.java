@@ -9,6 +9,22 @@ package pointofsale;
  *
  * @author mdeboer1
  */
-public class FlatRateDiscountStrategy {
+public class FlatRateDiscountStrategy implements DiscountStrategy {
+
+    private double discountAmount;
+    
+    // Custom constructor created to allow discount amount to be changed
+    public FlatRateDiscountStrategy(double discountAmount){
+        setDiscountAmount(discountAmount);
+    }
+    // Used to change the discount amount
+    private void setDiscountAmount(double discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    @Override
+    public double getDiscountAmount() {
+        return discountAmount;
+    }
     
 }

@@ -11,4 +11,6 @@ package pointofsale;
  */
 public interface DiscountStrategy {
     
+    public abstract double getDiscountAmount();
+    
 }

@@ -9,6 +9,21 @@ package pointofsale;
  *
  * @author mdeboer1
  */
-public class PercentageDiscountStrategy {
+public class PercentageDiscountStrategy implements DiscountStrategy{
+
+    private double discountAmount;
+    
+    public PercentageDiscountStrategy(double discountAmount){
+        setDiscountAmount(discountAmount);
+    }
+
+    private void setDiscountAmount(double discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+
+    @Override
+    public double getDiscountAmount() {
+        return discountAmount;
+    }
     
 }

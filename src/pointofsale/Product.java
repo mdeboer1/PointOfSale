@@ -9,7 +9,6 @@ package pointofsale;
  *
  * @author mdeboer1
  */
-public class Startup {
-    POSRegister register;
+public class Product {
     
 }
