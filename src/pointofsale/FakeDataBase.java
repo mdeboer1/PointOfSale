@@ -27,7 +27,7 @@ public class FakeDataBase {
     
     public Product getProductDescription(String productNumber){
         int index = 0;
-        for(int i = 0; i <= products.length; i++){
+        for(int i = 0; i <= products.length - 1 ; i++){
             if (productNumber.equals(products[i].getProductCode())){
                 index = i;
             }
@@ -37,7 +37,7 @@ public class FakeDataBase {
     
     public Customer getCustomerInformation(String customerNumber){
         int index = 0;
-        for(int i = 0; i <= customers.length; i++){
+        for(int i = 0; i <= customers.length - 1; i++){
             if (customerNumber.equals(customers[i].getCustomerNumber())){
                 index = i;
             }

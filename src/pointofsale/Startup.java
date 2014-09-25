@@ -10,6 +10,10 @@ package pointofsale;
  * @author mdeboer1
  */
 public class Startup {
-    POSRegister register;
+    public static void main(String[] args) {
+        POSRegister register = new POSRegister(1, "0001", "2");
+    
+        System.out.println(register.getReceipt());
+    }
     
 }

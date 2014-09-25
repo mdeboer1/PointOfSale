@@ -25,13 +25,13 @@ public class POSRegister {
         product = database.getProductDescription(productID);
         //Create new LineItem object to hold line item information
         lineItem = new LineItem(product, quantity, customer, receipt);
-        
-        
     }
 
     public int getReceiptNumber() {
         return receipt.getReceiptNumber();
     }
     
-    
+    public String getReceipt(){
+        return receipt.getReceipt();
+    }
 }    

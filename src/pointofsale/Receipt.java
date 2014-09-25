@@ -37,8 +37,9 @@ public class Receipt {
     }
     
     public String getReceipt(){
-        String receipt = " ";
+//        String receipt = " ";
         
-        return receipt;
+        return customerNumber + " " + quantity + " " + productNumber + " " + 
+                productDescription + " " + price;
     }
 }
