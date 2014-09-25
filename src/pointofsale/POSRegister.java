@@ -14,16 +14,17 @@ public class POSRegister {
     private FakeDataBase database;
     private LineItem lineItem;
     private Product product;
+    private Customer customer;
     
-    public POSRegister(double quanity, int productID, int customerNumber){
+    public POSRegister(int quantity, String productID, String customerNumber){
         //Create new Receipt object
         this.receipt = new Receipt();
         //Create new FakeDataBase object to reference productID and customerNumber
         this.database = new FakeDataBase();
-        //Create new product object to retrieve discount information
-        this.product = new Product();
+        customer = database.getCustomerInformation(customerNumber);
+        product = database.getProductDescription(productID);
         //Create new LineItem object to hold line item information
-        this.lineItem = new LineItem();
+        lineItem = new LineItem(product, quantity, customer, receipt);
         
         
     }

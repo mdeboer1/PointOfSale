@@ -10,5 +10,24 @@ package pointofsale;
  * @author mdeboer1
  */
 public class LineItem {
+    private Product product;
+    private int quantity;
+    public LineItem(Product product, int quantity, Customer customer, Receipt receipt){
+        this.product = product;
+        setQuantity(quantity);
+        receipt.setLineItem(quantity, product, customer);
+        
+    }
     
+    public void getProductPrice(){
+        product.getPrice();
+    }
+    
+    private void setQuantity(int quantity){
+        this.quantity = quantity;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 }
