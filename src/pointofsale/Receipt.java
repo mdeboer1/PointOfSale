@@ -18,7 +18,9 @@ public class Receipt {
     private int quantity;
     private double price;
     private String customerNumber;
-   
+    private double discountAmount;
+    private LineItem [] lineItems = new LineItem[1];
+    
     public Receipt(){
         receiptNumber = receiptNumberIncrementer;
         receiptNumberIncrementer++;
@@ -34,6 +36,8 @@ public class Receipt {
         this.quantity = quantity;
         this.price = product.getPrice();
         this.customerNumber = customer.getCustomerNumber();
+        this.discountAmount = product.getDiscountAmount();
+        //add info to lineItems array
     }
     
     public String getReceipt(){

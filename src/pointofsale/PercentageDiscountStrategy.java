@@ -13,6 +13,10 @@ public class PercentageDiscountStrategy implements DiscountStrategy{
 
     private double discountAmount;
     
+    public PercentageDiscountStrategy() {
+        
+    }
+    
     public PercentageDiscountStrategy(double discountAmount){
         setDiscountAmount(discountAmount);
     }

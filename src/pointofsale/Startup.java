@@ -14,6 +14,7 @@ public class Startup {
         POSRegister register = new POSRegister(1, "0001", "2");
     
         System.out.println(register.getReceipt());
+        
     }
     
 }

@@ -13,6 +13,9 @@ public class FlatRateDiscountStrategy implements DiscountStrategy {
 
     private double discountAmount;
     
+    public FlatRateDiscountStrategy(){
+        
+    }
     // Custom constructor created to allow discount amount to be changed
     public FlatRateDiscountStrategy(double discountAmount){
         setDiscountAmount(discountAmount);
