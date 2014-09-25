@@ -15,7 +15,7 @@ public class LineItem {
     public LineItem(Product product, int quantity, Customer customer, Receipt receipt){
         this.product = product;
         setQuantity(quantity);
-        receipt.setLineItem(quantity, product, customer);
+        receipt.setLineItem(quantity, product, customer, receipt);
         
     }
     

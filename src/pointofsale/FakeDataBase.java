@@ -16,7 +16,7 @@ public class FakeDataBase {
     private Customer customer4 = new Customer("4");
     private Customer [] customers = {customer1, customer2, customer3, customer4};
     private Product product1 = new Product("Hat", "0001", 19.95, "Percent");
-    private Product product2 = new Product("T-SHirt", "00002", 15.99, "None");
+    private Product product2 = new Product("T-SHirt", "00002", 15.99);
     private Product product3 = new Product("Bath robe", "00003", 39.95, "Flat Rate");
     private Product product4 = new Product("Mixer", "00004", 399.99, "Percent");
     private Product[] products = {product1, product2, product3, product4};
@@ -53,8 +53,8 @@ public class FakeDataBase {
         customers = tempArray;
     }
     
-    public void addProductToArray(String productDescription, String productNumber, double price, String discountType){
-        Product newProduct = new Product(productDescription, productNumber, price, discountType);
+    public void addProductToArray(String productDescription, String productNumber, double price, String DiscountType){
+        Product newProduct = new Product(productDescription, productNumber, price, DiscountType);
         Product[] tempArray = new Product[products.length + 1];
         System.arraycopy(products, 0, tempArray, 0, products.length);
         tempArray[products.length] = newProduct;

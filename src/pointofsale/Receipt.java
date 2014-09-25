@@ -30,7 +30,7 @@ public class Receipt {
         return receiptNumber;
     }
     
-    public void setLineItem(int quantity, Product product, Customer customer){
+    public void setLineItem(int quantity, Product product, Customer customer, Receipt receipt){
         this.productNumber = product.getProductCode();
         this.productDescription = product.getProductDescription();
         this.quantity = quantity;
@@ -44,6 +44,6 @@ public class Receipt {
 //        String receipt = " ";
         
         return customerNumber + " " + quantity + " " + productNumber + " " + 
-                productDescription + " " + price;
+                productDescription + " " + price + " " + discountAmount;
     }
 }

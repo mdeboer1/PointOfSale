@@ -11,7 +11,7 @@ package pointofsale;
  */
 public class PercentageDiscountStrategy implements DiscountStrategy{
 
-    private double discountAmount;
+    private double discountAmount = .15;
     
     public PercentageDiscountStrategy() {
         

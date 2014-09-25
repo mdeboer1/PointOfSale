@@ -11,7 +11,7 @@ package pointofsale;
  */
 public class FlatRateDiscountStrategy implements DiscountStrategy {
 
-    private double discountAmount;
+    private double discountAmount = 5;
     
     public FlatRateDiscountStrategy(){
         

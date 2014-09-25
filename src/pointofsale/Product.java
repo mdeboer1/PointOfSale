@@ -14,13 +14,19 @@ public class Product {
     private String productCode;
     private double price;
     private String discountType;
-    private double discountAmount;
     private DiscountStrategy discount;
     private DiscountStrategy[] discountTypeArray = {new PercentageDiscountStrategy(),
         new FlatRateDiscountStrategy()};
     private String [] discounts = {"Percent", "Flat Rate"};
+    
     public Product(){
         
+    }
+    
+    public Product(String description, String ProductCode, double price){
+        setProductDescription(description);
+        setProductCode(productCode);
+        setPrice(price);
     }
     
     public Product(String description, String productCode, double price, String discountType){
@@ -28,6 +34,7 @@ public class Product {
         setProductCode(productCode);
         setPrice(price);
         setDiscountType(discountType);
+        System.out.println(discountType);
     }
 
     public String getProductDescription() {
@@ -55,15 +62,25 @@ public class Product {
     }
 
     public double getDiscountAmount() {
-        return discountAmount = discount.getDiscountAmount();
+        
+        return discount.getDiscountAmount();
+    }
+    
+    public String getDiscountType(){
+        return discountType;
+    }
+    
+    public void changeDiscountType(String discountType){
+        this.discountType = discountType;
     }
 
-    public void setDiscountType(String discountType) {
+    private void setDiscountType(String discountType) {
         // For loop for arrays to determine the type of discount.
         this.discountType = discountType;
         for(int i = 0; i <= discounts.length-1; i++){
             if (discountType.equals(discounts[i])){
                 discount = discountTypeArray[i];
+                System.out.println(discount);
             }
         }
     }
