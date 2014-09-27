@@ -13,12 +13,6 @@ public class Receipt {
     //Static variable to count number of objects created, to be used for receiptNumber property
     public static int receiptNumberIncrementer = 1;
     private final int receiptNumber;
-    private String productNumber;
-    private String productDescription;
-    private int quantity;
-    private double price;
-    private String customerNumber;
-    private double discountAmount;
     private LineItem [] lineItems = new LineItem[1];
     
     public Receipt(){
@@ -30,22 +24,24 @@ public class Receipt {
         return receiptNumber;
     }
     
-    public void setLineItem(int quantity, Product product, Customer customer, Receipt receipt){
-        this.productNumber = product.getProductCode();
-        this.productDescription = product.getProductDescription();
-        this.quantity = quantity;
-        this.price = product.getPrice();
-        this.customerNumber = customer.getCustomerNumber();
-//        if (!(product.getDiscountType() == null)){
-        this.discountAmount = product.getDiscountAmount();
-//        add info to lineItems array
-//        }
+    public void setFirstLineItem(LineItem lineItem){
+        lineItems[0] = lineItem;
+    }
+    public void setNewLineItem(LineItem lineItem){
+        LineItem [] tempArray = new LineItem[lineItems.length + 1];
+        System.arraycopy(lineItems, 0, tempArray, 0, lineItems.length);
+        tempArray[lineItems.length] = lineItem;
+        lineItems = tempArray;
     }
     
     public String getReceipt(){
-//        String receipt = " ";
-        
-        return customerNumber + " " + quantity + " " + productNumber + " " + 
-                productDescription + " " + price + " " + discountAmount;
+        String temp = "";
+        for (int i = 0; i <= lineItems.length - 1; i++){
+             temp = lineItems[i].getCustomerNumber() + " " +
+                    lineItems[i].getQuantity() + " " + lineItems[i].getProductNumber() +
+                    " " + lineItems[i].getProductDescription() + " " + lineItems[i].getPrice() + 
+                    " " + lineItems[i].getDiscountAmount();
+        }
+        return temp;
     }
 }

@@ -12,11 +12,22 @@ package pointofsale;
 public class LineItem {
     private Product product;
     private int quantity;
+    private String productNumber;
+    private String productDescription;
+    private double price;
+    private String customerNumber;
+    private double discountAmount;
+    
     public LineItem(Product product, int quantity, Customer customer, Receipt receipt){
         this.product = product;
         setQuantity(quantity);
-        receipt.setLineItem(quantity, product, customer, receipt);
-        
+        this.productNumber = product.getProductCode();
+        this.productDescription = product.getProductDescription();
+        this.discountAmount = product.getDiscountAmount();
+        this.quantity = quantity;
+        this.price = product.getPrice();
+        this.customerNumber = customer.getCustomerNumber();
+        this.discountAmount = product.getDiscountAmount();
     }
     
     public void getProductPrice(){
@@ -30,4 +41,46 @@ public class LineItem {
     public int getQuantity() {
         return quantity;
     }
+
+    public String getProductNumber() {
+        return productNumber;
+    }
+
+    private void setProductNumber(String productNumber) {
+        this.productNumber = productNumber;
+    }
+
+    public String getProductDescription() {
+        return productDescription;
+    }
+
+    private void setProductDescription(String productDescription) {
+        this.productDescription = productDescription;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    private void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getCustomerNumber() {
+        return customerNumber;
+    }
+
+    private void setCustomerNumber(String customerNumber) {
+        this.customerNumber = customerNumber;
+    }
+
+    public double getDiscountAmount() {
+        return discountAmount;
+    }
+
+    private void setDiscountAmount(double discountAmount) {
+        this.discountAmount = discountAmount;
+    }
+    
+    
 }

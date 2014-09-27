@@ -17,23 +17,23 @@ public class POSRegister {
     private Customer customer;
     
     public POSRegister(){
-        //Create new Receipt object
         this.receipt = new Receipt();
-//        //Create new FakeDataBase object to reference productID and customerNumber
-//        this.database = new FakeDataBase();
-//        customer = database.getCustomerInformation(customerNumber);
-//        product = database.getProductDescription(productID);
-//        //Create new LineItem object to hold line item information
-//        lineItem = new LineItem(product, quantity, customer, receipt);
     }
     
-    public void setNewLineItem(int quantity, String productID, String customerNumber){
+    public void setFirstLineItem(int quantity, String productID, String customerNumber){
         //Create new FakeDataBase object to reference productID and customerNumber
         this.database = new FakeDataBase();
         customer = database.getCustomerInformation(customerNumber);
         product = database.getProductDescription(productID);
         //Create new LineItem object to hold line item information
         lineItem = new LineItem(product, quantity, customer, receipt);
+        receipt.setFirstLineItem(lineItem);
+    }
+    
+    public void setNextLineItem(int quantity, String productID, String customerNumber){
+        product = database.getProductDescription(productID);
+        lineItem = new LineItem(product, quantity, customer, receipt);
+        receipt.setNewLineItem(lineItem);
     }
 
     public int getReceiptNumber() {

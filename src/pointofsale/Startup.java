@@ -12,9 +12,9 @@ package pointofsale;
 public class Startup {
     public static void main(String[] args) {
         POSRegister register = new POSRegister();
-        register.setNewLineItem(1, "00004", "3");
+        register.setFirstLineItem(1, "00004", "3");
         System.out.println(register.getReceipt());
-        register.setNewLineItem(1, "00002", "3");
+        register.setNextLineItem(1, "00002", "3");
         System.out.println(register.getReceipt());
         
     }
