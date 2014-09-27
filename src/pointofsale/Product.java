@@ -23,10 +23,11 @@ public class Product {
         
     }
     
-    public Product(String description, String ProductCode, double price){
+    public Product(String description, String productCode, double price){
         setProductDescription(description);
         setProductCode(productCode);
         setPrice(price);
+        System.out.println(productCode + " in no discount constructor");
     }
     
     public Product(String description, String productCode, double price, String discountType){
@@ -34,7 +35,8 @@ public class Product {
         setProductCode(productCode);
         setPrice(price);
         setDiscountType(discountType);
-        System.out.println(discountType);
+        System.out.println(discountType + " in constructor");
+        System.out.println(productCode + " in constructor");
     }
 
     public String getProductDescription() {
@@ -62,7 +64,7 @@ public class Product {
     }
 
     public double getDiscountAmount() {
-        
+        System.out.println(discountType + " in getDiscountType");
         return discount.getDiscountAmount();
     }
     
@@ -80,7 +82,7 @@ public class Product {
         for(int i = 0; i <= discounts.length-1; i++){
             if (discountType.equals(discounts[i])){
                 discount = discountTypeArray[i];
-                System.out.println(discount);
+                
             }
         }
     }
