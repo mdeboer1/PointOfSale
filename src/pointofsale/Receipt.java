@@ -19,7 +19,7 @@ public class Receipt {
     public static int receiptNumberIncrementer = 1;
     private final int receiptNumber;
     private String storeName = "Kohl's Department Store";
-    private String thankYou = "\n\t\tThank you for shopping at Kohl's!";
+    private String thankYou = "\n\t\tThank you for shopping at Kohl's!\n\n";
     private double extendedPrice;
     private double amountSavedPerLineItem;
     private double grandTotalOfDiscount;
@@ -55,13 +55,13 @@ public class Receipt {
         Calendar currentDate = Calendar.getInstance(); //Get the current date
         SimpleDateFormat formatter= new SimpleDateFormat("MMM dd yyyy HH:mm:ss"); //format it as per your requirement
         String getTodaysDate = formatter.format(currentDate.getTime());
-        String receiptHeader = storeName + "\n" + "Date: " + getTodaysDate + 
-                "\nReceipt Number: " + receiptNumber;
-        String firstLineItem = "";
-        String nextLineItem = " ";
+        System.out.println(storeName + "\n" + "Date: " + getTodaysDate + 
+                "\nReceipt Number: " + receiptNumber);
+//        String firstLineItem = "";
+//        String nextLineItem = " ";
         for (int i = 0; i <= lineItems.length - 1; i++){
             if (i == 0){
-                if (lineItems[1].getDiscountAmount() < 1){
+                if (lineItems[i].getDiscountAmount() < 1){
                     amountSavedPerLineItem = (lineItems[i].getDiscountAmount() * 
                             (lineItems[i].getPrice() * lineItems[i].getQuantity()));
                 }
@@ -73,22 +73,29 @@ public class Receipt {
                 extendedPrice = (lineItems[i].getPrice() * lineItems[i].getQuantity()) 
                         - amountSavedPerLineItem;
                 subtotal += extendedPrice;
-                firstLineItem = "\nCustomer Number: " + lineItems[i].getCustomerNumber() +
+                
+                System.out.println("\nCustomer Number: " + lineItems[i].getCustomerNumber() +
                         "\n---------------------------------------------------------------\n" +
                         lineItems[i].getProductNumber() + "\t" + lineItems[i].getProductDescription() + 
                         "\t" + lineItems[i].getQuantity() + "\t" + lineItems[i].getPrice() + 
-                        "\t" + amountSavedPerLineItem + "\t" + extendedPrice + "\n";
+                        "\t" + amountSavedPerLineItem + "\t" + extendedPrice + "\n");
             }
             if (i > 0 && (!(i > lineItems.length - 1))){
-                amountSavedPerLineItem = (lineItems[i].getDiscountAmount() * 
-                        (lineItems[i].getPrice() * lineItems[i].getQuantity()));
+                if (lineItems[i].getDiscountAmount() < 1){
+                    amountSavedPerLineItem = (lineItems[i].getDiscountAmount() * 
+                            (lineItems[i].getPrice() * lineItems[i].getQuantity()));
+                }
+                else {
+                    amountSavedPerLineItem = (lineItems[i].getDiscountAmount() * 
+                            lineItems[i].getQuantity());
+                }
                 grandTotalOfDiscount += amountSavedPerLineItem;
                 extendedPrice = (lineItems[i].getPrice() * lineItems[i].getQuantity()) 
                         - amountSavedPerLineItem;
                 subtotal += extendedPrice;
-                nextLineItem = lineItems[i].getProductNumber() + "\t" + lineItems[i].getProductDescription() 
+                System.out.println(lineItems[i].getProductNumber() + "\t" + lineItems[i].getProductDescription() 
                     + "\t" + lineItems[i].getQuantity() + "\t" + lineItems[i].getPrice() + 
-                    "\t" + amountSavedPerLineItem + "\t" + extendedPrice + "\n";
+                    "\t" + amountSavedPerLineItem + "\t" + extendedPrice + "\n");
             }
         }
         taxAmount = subtotal * taxes;
@@ -97,7 +104,7 @@ public class Receipt {
                 "\n\t\t\t\t\tSubtotal: " + subtotal + "\n" + "\t\t\t\t\tTaxes: " + 
                 taxAmount + "\n\t\t\t\t\tGrand Total: " + grandTotal + "\n";        
                 
-        return receiptHeader + firstLineItem + nextLineItem + receiptTotals + thankYou;
+        return receiptTotals + thankYou;
         
     }
 }
