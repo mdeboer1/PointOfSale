@@ -36,10 +36,10 @@ public class Receipt {
         this.quantity = quantity;
         this.price = product.getPrice();
         this.customerNumber = customer.getCustomerNumber();
-        if (!(product.getDiscountType() == null)){
+//        if (!(product.getDiscountType() == null)){
         this.discountAmount = product.getDiscountAmount();
-        //add info to lineItems array
-        }
+//        add info to lineItems array
+//        }
     }
     
     public String getReceipt(){

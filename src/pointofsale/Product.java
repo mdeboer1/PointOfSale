@@ -15,9 +15,9 @@ public class Product {
     private double price;
     private String discountType;
     private DiscountStrategy discount;
-    private DiscountStrategy[] discountTypeArray = {new PercentageDiscountStrategy(),
-        new FlatRateDiscountStrategy()};
-    private String [] discounts = {"Percent", "Flat Rate"};
+//    private DiscountStrategy[] discountTypeArray = {new PercentageDiscountStrategy(),
+//        new FlatRateDiscountStrategy()};
+//    private String [] discounts = {"Percent", "Flat Rate"};
     
     public Product(){
         
@@ -27,16 +27,17 @@ public class Product {
         setProductDescription(description);
         setProductCode(productCode);
         setPrice(price);
-        System.out.println(productCode + " in no discount constructor");
+//        System.out.println(productCode + " in no discount constructor");
     }
     
-    public Product(String description, String productCode, double price, String discountType){
+    public Product(String description, String productCode, double price, DiscountStrategy discount){
         setProductDescription(description);
         setProductCode(productCode);
         setPrice(price);
-        setDiscountType(discountType);
-        System.out.println(discountType + " in constructor");
-        System.out.println(productCode + " in constructor");
+        this.discount = discount;
+//        setDiscountType(discountType);
+//        System.out.println(discountType + " in constructor");
+//        System.out.println(productCode + " in constructor");
     }
 
     public String getProductDescription() {
@@ -64,8 +65,15 @@ public class Product {
     }
 
     public double getDiscountAmount() {
-        System.out.println(discountType + " in getDiscountType");
-        return discount.getDiscountAmount();
+//        System.out.println(discountType + " in getDiscountType");
+        double tempVar;
+        if (discount == null){
+            tempVar = 0;
+        }
+        else{
+            tempVar = discount.getDiscountAmount();
+        }
+        return tempVar;
     }
     
     public String getDiscountType(){
@@ -76,29 +84,29 @@ public class Product {
         this.discountType = discountType;
     }
 
-    private void setDiscountType(String discountType) {
-        // For loop for arrays to determine the type of discount.
-        this.discountType = discountType;
-        for(int i = 0; i <= discounts.length-1; i++){
-            if (discountType.equals(discounts[i])){
-                discount = discountTypeArray[i];
-                
-            }
-        }
-    }
+//    private void setDiscountType(String discountType) {
+//        // For loop for arrays to determine the type of discount.
+//        this.discountType = discountType;
+//        for(int i = 0; i <= discounts.length-1; i++){
+//            if (discountType.equals(discounts[i])){
+//                discount = discountTypeArray[i];
+//                
+//            }
+//        }
+//    }
     
-    public void addDiscountRateType(DiscountStrategy discount, String discountType){
+//    public void addDiscountRateType(DiscountStrategy discount, String discountType){
         //Expand discountTypeArray
-        DiscountStrategy newStrategy = discount;
-        DiscountStrategy [] tempArray = new DiscountStrategy[discountTypeArray.length +1];
-        System.arraycopy(discountTypeArray, 0, tempArray, 0, discountTypeArray.length);
-        tempArray[discountTypeArray.length] = newStrategy;
-        discountTypeArray = tempArray;
-        
-        // Expand discounts array
-        String [] tempItems = new String[discounts.length + 1];
-        System.arraycopy(discounts, 0, tempItems, 0, discounts.length);
-        tempItems[discounts.length] = discountType;
-        discounts = tempItems;
-    }
+//        DiscountStrategy newStrategy = discount;
+//        DiscountStrategy [] tempArray = new DiscountStrategy[discountTypeArray.length +1];
+//        System.arraycopy(discountTypeArray, 0, tempArray, 0, discountTypeArray.length);
+//        tempArray[discountTypeArray.length] = newStrategy;
+//        discountTypeArray = tempArray;
+//        
+//         Expand discounts array
+//        String [] tempItems = new String[discounts.length + 1];
+//        System.arraycopy(discounts, 0, tempItems, 0, discounts.length);
+//        tempItems[discounts.length] = discountType;
+//        discounts = tempItems;
+//    }
 }
