@@ -15,10 +15,10 @@ public class FakeDataBase {
     private Customer customer3 = new Customer("3");
     private Customer customer4 = new Customer("4");
     private Customer [] customers = {customer1, customer2, customer3, customer4};
-    private Product product1 = new Product("Hat", "00001", 19.95, new PercentageDiscountStrategy());
-    private Product product2 = new Product("T-SHirt", "00002", 15.99);
-    private Product product3 = new Product("Robe", "00003", 39.95, new FlatRateDiscountStrategy());
-    private Product product4 = new Product("Mixer", "00004", 399.99, new PercentageDiscountStrategy());
+    private Product product1 = new Product("Hat    ", "00001", 19.95, new PercentageDiscountStrategy());
+    private Product product2 = new Product("T-Shirt", "00002", 15.99);
+    private Product product3 = new Product("Robe   ", "00003", 39.95, new FlatRateDiscountStrategy());
+    private Product product4 = new Product("Jeans  ", "00004", 59.95, new PercentageDiscountStrategy());
     private Product[] products = {product1, product2, product3, product4};
 
     public FakeDataBase(){
