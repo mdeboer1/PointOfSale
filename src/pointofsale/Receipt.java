@@ -27,6 +27,7 @@ public class Receipt {
     private double taxes = .051;
     private double taxAmount;
     private double grandTotal;
+    private String customerNumber;
     
     private LineItem [] lineItems = new LineItem[1];
     
@@ -39,10 +40,25 @@ public class Receipt {
         return receiptNumber;
     }
     
-    public void setFirstLineItem(LineItem lineItem){
+    public void setFirstLineItem(LineItem lineItem, Customer customer){
+        if (lineItem == null){
+            throw new IllegalArgumentException(
+                    "error: lineItem cannot be null");
+        }
+        else if (customer == null){
+            throw new IllegalArgumentException(
+                    "error: customer cannot be null");
+        }
         lineItems[0] = lineItem;
+        this.customerNumber = customer.getCustomerNumber();
+        customer.addReceiptToHistory(receiptNumber);
     }
+    
     public void setNewLineItem(LineItem lineItem){
+        if (lineItem == null){
+            throw new IllegalArgumentException(
+                    "error: lineItem cannot be null");
+        }
         LineItem [] tempArray = new LineItem[lineItems.length + 1];
         System.arraycopy(lineItems, 0, tempArray, 0, lineItems.length);
         tempArray[lineItems.length] = lineItem;
@@ -79,7 +95,7 @@ public class Receipt {
 //                df.format(grandTotalOfDiscount);
 //                df.format(extendedPrice);
 //                df.format(subtotal);    
-                System.out.println("Customer Number: " + lineItems[i].getCustomerNumber() +
+                System.out.println("Customer Number: " + customerNumber +
                         "\n---------------------------------------------------------------\n");
                 System.out.printf("%s \t %s \t %d \t %.2f \t %.2f \t %.2f \n", lineItems[i].getProductNumber(),
                         lineItems[i].getProductDescription(), lineItems[i].getQuantity(),

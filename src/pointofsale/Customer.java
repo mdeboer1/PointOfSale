@@ -11,6 +11,7 @@ package pointofsale;
  */
 public class Customer {
     private String customerNumber;
+    private int[] receiptHistory = new int[1];
     
     public Customer(String customerNumber){
         setCustomerNumber(customerNumber);
@@ -21,6 +22,22 @@ public class Customer {
     }
 
     private void setCustomerNumber(String customerNumber) {
+        if (customerNumber == null || customerNumber.equals(" ")){
+            throw new IllegalArgumentException(
+                    "error: custemer number must be a valid String");
+        }
         this.customerNumber = customerNumber;
     }
+    
+    public void addReceiptToHistory(int receiptNumber){
+        if (receiptNumber <= 0){
+            throw new IllegalArgumentException(
+                "error: receiptNumber must be greater than zero");
+        }
+        int [] tempArray = new int[receiptHistory.length + 1];
+        System.arraycopy(receiptHistory, 0, tempArray, 0, receiptHistory.length);
+        tempArray[receiptHistory.length] = receiptNumber;
+        receiptHistory = tempArray;
+    }
+    
 }

@@ -27,6 +27,10 @@ public class Product {
     }
     
     public Product(String description, String productCode, double price, DiscountStrategy discount){
+        if (discount == null){
+            throw new IllegalArgumentException(
+                    "error: discount type is required and cannot be null");
+        }
         setProductDescription(description);
         setProductCode(productCode);
         setPrice(price);
@@ -38,6 +42,12 @@ public class Product {
     }
 
     private void setProductDescription(String productDescription) {
+        if (productDescription == null || productDescription.equals(" ")){
+            if (productDescription == null || productDescription.equals(" ")){
+            throw new IllegalArgumentException(
+                    "error: product description must be a valid String");
+            }
+        }
         this.productDescription = productDescription;
     }
 
@@ -46,6 +56,12 @@ public class Product {
     }
 
     private void setProductCode(String productCode) {
+        if (productCode == null || productCode.equals(" ")){
+            if (productCode == null || productCode.equals(" ")){
+            throw new IllegalArgumentException(
+                    "error: product description must be a valid String");
+            }
+        }
         this.productCode = productCode;
     }
 
@@ -54,6 +70,10 @@ public class Product {
     }
 
     private void setPrice(double price) {
+        if (price <= 0){
+            throw new IllegalArgumentException(
+                    "error: price must be greater than zero");
+        }
         this.price = price;
     }
 

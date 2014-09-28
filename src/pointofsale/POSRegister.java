@@ -21,18 +21,24 @@ public class POSRegister {
     }
     
     public void setFirstLineItem(int quantity, String productID, String customerNumber){
+        if (quantity < 1 || productID.equals(null) || productID.equals(" ") || customerNumber.equals(null) 
+                || customerNumber.equals(" ")){
+            throw new IllegalArgumentException(
+                    "error: Quantity must be a least one and productID and custemer"
+                            + "number must be Strings");
+        }
         //Create new FakeDataBase object to reference productID and customerNumber
         this.database = new FakeDataBase();
         customer = database.getCustomerInformation(customerNumber);
         product = database.getProductDescription(productID);
         //Create new LineItem object to hold line item information
-        lineItem = new LineItem(product, quantity, customer, receipt);
-        receipt.setFirstLineItem(lineItem);
+        lineItem = new LineItem(product, quantity, receipt);
+        receipt.setFirstLineItem(lineItem, customer);
     }
     
     public void setNextLineItem(int quantity, String productID, String customerNumber){
         product = database.getProductDescription(productID);
-        lineItem = new LineItem(product, quantity, customer, receipt);
+        lineItem = new LineItem(product, quantity, receipt);
         receipt.setNewLineItem(lineItem);
     }
 

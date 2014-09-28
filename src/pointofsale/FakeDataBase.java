@@ -46,6 +46,10 @@ public class FakeDataBase {
     }    
     
     public void addCustomerToArray(String customerNumber){
+        if (customerNumber == null ||customerNumber.equals(" ")){
+             throw new IllegalArgumentException(
+                    "error: custemer number must be a valid String");
+        }
         Customer newCustomer = new Customer(customerNumber);
         Customer[] tempArray = new Customer[customers.length + 1];
         System.arraycopy(customers, 0, tempArray, 0, customers.length);
@@ -53,7 +57,23 @@ public class FakeDataBase {
         customers = tempArray;
     }
     
-    public void addProductToArray(String productDescription, String productNumber, double price, DiscountStrategy discount){
+    public void addProductToArrayWithDiscount(String productDescription, String productNumber, double price, DiscountStrategy discount){
+        if(productDescription == null || productDescription.equals(" ")){
+            throw new IllegalArgumentException(
+                    "error: product description must be a valid String");
+        }
+        else if(productNumber == null || productNumber.equals(" ")){
+            throw new IllegalArgumentException(
+                    "error: product number must be a valid String");
+        }
+        else if (price <= 0){
+            throw new IllegalArgumentException(
+                    "error: price must be greater than zero");
+        }
+        else if (discount == null){
+            throw new IllegalArgumentException(
+                    "error: type of discount must be an object");
+        }
         Product newProduct = new Product(productDescription, productNumber, price, discount);
         Product[] tempArray = new Product[products.length + 1];
         System.arraycopy(products, 0, tempArray, 0, products.length);
@@ -61,4 +81,23 @@ public class FakeDataBase {
         products = tempArray;
     }
     
+    public void addProductToArrayWithoutDiscount(String productDescription, String productNumber, double price){
+        if(productDescription == null || productDescription.equals(" ")){
+            throw new IllegalArgumentException(
+                    "error: product description must be a valid String");
+        }
+        else if(productNumber == null || productNumber.equals(" ")){
+            throw new IllegalArgumentException(
+                    "error: product number must be a valid String");
+        }
+        else if (price <= 0){
+            throw new IllegalArgumentException(
+                    "error: price must be greater than zero");
+        }
+        Product newProduct = new Product(productDescription, productNumber, price);
+        Product[] tempArray = new Product[products.length + 1];
+        System.arraycopy(products, 0, tempArray, 0, products.length);
+        tempArray[products.length] = newProduct;
+        products = tempArray;
+    }
 }

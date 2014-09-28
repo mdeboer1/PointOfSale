@@ -15,19 +15,17 @@ public class LineItem {
     private String productNumber;
     private String productDescription;
     private double price;
-    private String customerNumber;
+    
     private double discountAmount;
     
-    public LineItem(Product product, int quantity, Customer customer, Receipt receipt){
+    public LineItem(Product product, int quantity, Receipt receipt){
         this.product = product;
         setQuantity(quantity);
-        this.productNumber = product.getProductCode();
-        this.productDescription = product.getProductDescription();
-        this.discountAmount = product.getDiscountAmount();
-        this.quantity = quantity;
-        this.price = product.getPrice();
-        this.customerNumber = customer.getCustomerNumber();
-        this.discountAmount = product.getDiscountAmount();
+        setProductNumber(product.getProductCode());
+        setProductDescription(product.getProductDescription());
+        setDiscountAmount(product.getDiscountAmount());
+        setQuantity(quantity);
+        setPrice(product.getPrice());
     }
     
     public void getProductPrice(){
@@ -35,6 +33,10 @@ public class LineItem {
     }
     
     private void setQuantity(int quantity){
+        if(quantity < 1){
+            throw new IllegalArgumentException(
+                    "error: quantity must be at least 1");
+        }
         this.quantity = quantity;
     }
 
@@ -47,6 +49,10 @@ public class LineItem {
     }
 
     private void setProductNumber(String productNumber) {
+        if (productNumber == null || productNumber.equals(" ")){
+            throw new IllegalArgumentException(
+                    "error: product number must be a valid String");
+        }
         this.productNumber = productNumber;
     }
 
@@ -55,6 +61,10 @@ public class LineItem {
     }
 
     private void setProductDescription(String productDescription) {
+        if (productDescription == null || productDescription.equals(" ")){
+            throw new IllegalArgumentException(
+                    "error: product description must be a valid String");
+        }
         this.productDescription = productDescription;
     }
 
@@ -63,15 +73,11 @@ public class LineItem {
     }
 
     private void setPrice(double price) {
+        if (price <= 0){
+            throw new IllegalArgumentException(
+                    "error: price must be greater than zero");
+        }
         this.price = price;
-    }
-
-    public String getCustomerNumber() {
-        return customerNumber;
-    }
-
-    private void setCustomerNumber(String customerNumber) {
-        this.customerNumber = customerNumber;
     }
 
     public double getDiscountAmount() {
@@ -79,6 +85,10 @@ public class LineItem {
     }
 
     private void setDiscountAmount(double discountAmount) {
+        if (discountAmount < 0){
+            throw new IllegalArgumentException(
+                    "error: discount must be atleast zero or higher");
+        }
         this.discountAmount = discountAmount;
     }
     
