@@ -8,6 +8,9 @@ package pointofsale;
 /**
  *
  * @author mdeboer1
+ * This is the manager class for this project.  It delegates to all the other
+ * class.  It receives information from the startup class, then sends and receives
+ * information from the other classes as needed.
  */
 public class POSRegister {
     private Receipt receipt;

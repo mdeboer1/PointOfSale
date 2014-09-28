@@ -8,6 +8,7 @@ package pointofsale;
 /**
  *
  * @author mdeboer1
+ * This class creates and stores the information for the products.
  */
 public class Product {
     private String productDescription;

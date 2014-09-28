@@ -8,6 +8,10 @@ package pointofsale;
 /**
  *
  * @author mdeboer1
+ * This class is used to simulate a database.  It creates four customers and four
+ * product objects, stores them in arrays, and then sorts through to match the
+ * information passed from the POSRegister class to select the correct customer and
+ * product numbers.
  */
 public class FakeDataBase {
     private Customer customer1 = new Customer("1");

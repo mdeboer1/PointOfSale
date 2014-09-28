@@ -8,6 +8,7 @@ package pointofsale;
 /**
  *
  * @author mdeboer1
+ * This class creates each line item that is shown on the receipt.  
  */
 public class LineItem {
     private Product product;

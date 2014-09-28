@@ -8,6 +8,8 @@ package pointofsale;
 /**
  *
  * @author mdeboer1
+ * This class creates a simple customer example existing of only a customerNumber
+ * property and an array to store receiptHistory.
  */
 public class Customer {
     private String customerNumber;

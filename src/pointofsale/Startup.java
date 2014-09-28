@@ -8,6 +8,7 @@ package pointofsale;
 /**
  *
  * @author mdeboer1
+ * This is the startup class to test and run the POS project.
  */
 public class Startup {
     public static void main(String[] args) {

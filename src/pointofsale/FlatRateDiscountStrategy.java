@@ -8,6 +8,8 @@ package pointofsale;
 /**
  *
  * @author mdeboer1
+ * This class implements the abstraction layer and is used for a specific dollar
+ * amount of as a discount
  */
 public class FlatRateDiscountStrategy implements DiscountStrategy {
 

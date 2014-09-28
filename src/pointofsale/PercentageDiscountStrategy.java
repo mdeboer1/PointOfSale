@@ -8,6 +8,8 @@ package pointofsale;
 /**
  *
  * @author mdeboer1
+ * This class implements the abstraction layer and is used to add a percentage
+ * discount to a product
  */
 public class PercentageDiscountStrategy implements DiscountStrategy{
 
