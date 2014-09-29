@@ -19,7 +19,7 @@ public class LineItem {
     
     private double discountAmount;
     
-    public LineItem(Product product, int quantity, Receipt receipt){
+    public LineItem(Product product, int quantity){
         this.product = product;
         setQuantity(quantity);
         setProductNumber(product.getProductCode());

@@ -24,7 +24,7 @@ public class POSRegister {
     }
     
     public void setFirstLineItem(int quantity, String productID, String customerNumber){
-        if (quantity < 1 || productID.equals(null) || productID.equals(" ") || customerNumber.equals(null) 
+        if (quantity < 1 || productID == null || productID.equals(" ") || customerNumber == null 
                 || customerNumber.equals(" ")){
             throw new IllegalArgumentException(
                     "error: Quantity must be a least one and productID and custemer"
@@ -35,13 +35,19 @@ public class POSRegister {
         customer = database.getCustomerInformation(customerNumber);
         product = database.getProductDescription(productID);
         //Create new LineItem object to hold line item information
-        lineItem = new LineItem(product, quantity, receipt);
+        lineItem = new LineItem(product, quantity);
         receipt.setFirstLineItem(lineItem, customer);
     }
     
     public void setNextLineItem(int quantity, String productID, String customerNumber){
+        if (quantity < 1 || productID == null || productID.equals(" ") || customerNumber == null 
+                || customerNumber.equals(" ")){
+            throw new IllegalArgumentException(
+                    "error: Quantity must be a least one and productID and custemer"
+                            + "number must be Strings");
+        }
         product = database.getProductDescription(productID);
-        lineItem = new LineItem(product, quantity, receipt);
+        lineItem = new LineItem(product, quantity);
         receipt.setNewLineItem(lineItem);
     }
 

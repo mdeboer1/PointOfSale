@@ -150,8 +150,8 @@ public class Receipt {
 //        df.format(taxes);
 //        df.format(taxAmount);
 //        df.format(grandTotal);
-        System.out.printf("\n\t\t\t\tTotal Saved: \t %.2f \n\t\t\t\tSubtotal: \t%.2f\n" +
-                "\t\t\t\tGrand Total: \t%.2f\n",grandTotalOfDiscount,subtotal,grandTotal);
+        System.out.printf("\n\t\t\t\tTotal Saved: \t %.2f \n\t\t\t\tSubtotal: \t%.2f" +
+          "\n\t\t\t\tTaxes: \t\t %.2f \n\t\t\t\tGrand Total: \t%.2f\n",grandTotalOfDiscount,subtotal,taxes,grandTotal);
 //        System.out.println("\n\t\t\t\t\tTotal Saved: " + grandTotalOfDiscount +
 //                "\n\t\t\t\t\tSubtotal: " + subtotal + "\n" + "\t\t\t\t\tTaxes: " + 
 //                taxAmount + "\n\t\t\t\t\tGrand Total: " + grandTotal + "\n");        
