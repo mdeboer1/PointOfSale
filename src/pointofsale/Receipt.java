@@ -14,7 +14,7 @@ import java.util.Calendar;
  *This class creates the receipt.  It uses a custom constructor to create the
  receipt number and adds one to receiptNumberIncrementer (which actually just
  counts the number of objects created) that is used for incrementing the receipt
- number by one.  Line items are added in either the setFirstLineItem or setNewLineItem
+ number by one.  Line items are added in either the setFirstLineItem or addNewLineItem
  because different things occur if it is the first line item or not.  getConsoleReceipt
  method creates the formatting for the receipt as it is shown in the console
  output
@@ -36,42 +36,38 @@ public class Receipt {
     private double grandTotal;
     private String customerNumber;
     private LineItem [] lineItems = new LineItem[1];
+    private FakeDataBase database;
+    private LineItem lineItem;
+    private Customer customer;
     
-    public Receipt(){
+    public Receipt(int quantity, String productID, String customerNumber){
         receiptNumber = receiptNumberIncrementer;
         receiptNumberIncrementer++;
+        database = new FakeDataBase();
+        customer = database.getCustomerInformation(customerNumber);
+        this.customerNumber = customer.getCustomerNumber();
+        customer.addReceiptToHistory(receiptNumber);
+        lineItem = new LineItem(database.getProductDescription(productID), quantity);
+        lineItems[0] = lineItem;
     }
 
     public int getReceiptNumber() {
         return receiptNumber;
     }
     
-    public void setFirstLineItem(LineItem lineItem, Customer customer){
+    public final void addNewLineItem(int quantity, String productID){
         if (lineItem == null){
             throw new IllegalArgumentException(
                     "error: lineItem cannot be null");
         }
-        else if (customer == null){
-            throw new IllegalArgumentException(
-                    "error: customer cannot be null");
-        }
-        lineItems[0] = lineItem;
-        this.customerNumber = customer.getCustomerNumber();
-        customer.addReceiptToHistory(receiptNumber);
-    }
-    
-    public void setNewLineItem(LineItem lineItem){
-        if (lineItem == null){
-            throw new IllegalArgumentException(
-                    "error: lineItem cannot be null");
-        }
+        lineItem = new LineItem(database.getProductDescription(productID), quantity);
         LineItem [] tempArray = new LineItem[lineItems.length + 1];
         System.arraycopy(lineItems, 0, tempArray, 0, lineItems.length);
         tempArray[lineItems.length] = lineItem;
         lineItems = tempArray;
     }
     
-    public String getConsoleReceipt(){
+    public final String getConsoleReceipt(){
 //        NumberFormat nf = NumberFormat.getCurrencyInstance();
 //        DecimalFormat df = new DecimalFormat("#0.00");
         Calendar currentDate = Calendar.getInstance(); //Get the current date

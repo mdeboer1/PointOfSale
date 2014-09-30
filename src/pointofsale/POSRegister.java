@@ -14,46 +14,30 @@ package pointofsale;
  */
 public class POSRegister {
     private Receipt receipt;
-    private FakeDataBase database;
-    private LineItem lineItem;
-    private Product product;
-    private Customer customer;
     
-    public POSRegister(){
-        this.receipt = new Receipt();
-    }
-    
-    public void setFirstLineItem(int quantity, String productID, String customerNumber){
+    public POSRegister(int quantity, String productID, String customerNumber){ //take custNum as argument, send to Receipt constructor
         if (quantity < 1 || productID == null || productID.equals(" ") || customerNumber == null 
                 || customerNumber.equals(" ")){
             throw new IllegalArgumentException(
                     "error: Quantity must be a least one and productID and custemer"
                             + "number must be Strings");
         }
-        //Create new FakeDataBase object to reference productID and customerNumber
-        this.database = new FakeDataBase();
-        customer = database.getCustomerInformation(customerNumber);
-        product = database.getProductDescription(productID);
-        //Create new LineItem object to hold line item information
-        lineItem = new LineItem(product, quantity);
-        receipt.setFirstLineItem(lineItem, customer);
+        this.receipt = new Receipt(quantity, productID, customerNumber); 
     }
     
-    public void setNextLineItem(int quantity, String productID){
+    public void addNewLineItem(int quantity, String productID){
         if (quantity < 1 || productID == null || productID.equals(" ")){
             throw new IllegalArgumentException(
                     "error: Quantity must be a least one and productID must be a String");
         }
-        product = database.getProductDescription(productID);
-        lineItem = new LineItem(product, quantity);
-        receipt.setNewLineItem(lineItem);
+        receipt.addNewLineItem(quantity, productID);
     }
 
     public int getReceiptNumber() {
         return receipt.getReceiptNumber();
     }
     
-    public String getConsoleReceipt(){
-        return receipt.getConsoleReceipt();
+    public void generateConsoleReceipt(){
+        receipt.getConsoleReceipt();
     }
 }    

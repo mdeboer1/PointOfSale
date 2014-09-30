@@ -12,15 +12,13 @@ package pointofsale;
  */
 public class Startup {
     public static void main(String[] args) {
-        POSRegister register = new POSRegister();
-        register.setFirstLineItem(1, "00004", "3");
-        register.setNextLineItem(1, "00002");
-        register.getConsoleReceipt();
+        POSRegister register = new POSRegister(1, "00004", "3");
+        register.addNewLineItem(1, "00002");
+        register.generateConsoleReceipt();
         
-        POSRegister register2 = new POSRegister();
-        register2.setFirstLineItem(1, "00001", "2");
-        register2.setNextLineItem(1, "00002");
-        register2.setNextLineItem(1, "00003");
-        register2.getConsoleReceipt();
+        POSRegister register2 = new POSRegister(1, "00001", "2");
+        register2.addNewLineItem(1, "00002");
+        register2.addNewLineItem(1, "00003");
+        register2.generateConsoleReceipt();
     }
 }

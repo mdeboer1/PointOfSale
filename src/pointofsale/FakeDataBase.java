@@ -6,12 +6,12 @@
 package pointofsale;
 
 /**
- *
- * @author mdeboer1
  * This class is used to simulate a database.  It creates four customers and four
  * product objects, stores them in arrays, and then sorts through to match the
  * information passed from the POSRegister class to select the correct customer and
  * product numbers.
+ * @author mdeboer1
+ * 
  */
 public class FakeDataBase {
     private Customer customer1 = new Customer("1");
@@ -24,12 +24,8 @@ public class FakeDataBase {
     private Product product3 = new Product("Robe   ", "00003", 39.95, new FlatRateDiscountStrategy());
     private Product product4 = new Product("Jeans  ", "00004", 59.95, new PercentageDiscountStrategy());
     private Product[] products = {product1, product2, product3, product4};
-
-    public FakeDataBase(){
-        
-    }
     
-    public Product getProductDescription(String productNumber){
+    public final Product getProductDescription(String productNumber){
         int index = 0;
         for(int i = 0; i <= products.length - 1 ; i++){
             if (productNumber.equals(products[i].getProductCode())){
@@ -39,7 +35,7 @@ public class FakeDataBase {
         return products[index];
     }
     
-    public Customer getCustomerInformation(String customerNumber){
+    public final Customer getCustomerInformation(String customerNumber){
         int index = 0;
         for(int i = 0; i <= customers.length - 1; i++){
             if (customerNumber.equals(customers[i].getCustomerNumber())){
@@ -49,7 +45,7 @@ public class FakeDataBase {
         return customers[index];
     }    
     
-    public void addCustomerToArray(String customerNumber){
+    public final void addCustomerToArray(String customerNumber){
         if (customerNumber == null ||customerNumber.equals(" ")){
              throw new IllegalArgumentException(
                     "error: custemer number must be a valid String");
@@ -61,7 +57,7 @@ public class FakeDataBase {
         customers = tempArray;
     }
     
-    public void addProductToArrayWithDiscount(String productDescription, String productNumber, double price, DiscountStrategy discount){
+    public final void addProductToArrayWithDiscount(String productDescription, String productNumber, double price, DiscountStrategy discount){
         if(productDescription == null || productDescription.equals(" ")){
             throw new IllegalArgumentException(
                     "error: product description must be a valid String");
@@ -85,7 +81,7 @@ public class FakeDataBase {
         products = tempArray;
     }
     
-    public void addProductToArrayWithoutDiscount(String productDescription, String productNumber, double price){
+    public final void addProductToArrayWithoutDiscount(String productDescription, String productNumber, double price){
         if(productDescription == null || productDescription.equals(" ")){
             throw new IllegalArgumentException(
                     "error: product description must be a valid String");
