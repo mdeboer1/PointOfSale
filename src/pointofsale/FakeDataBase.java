@@ -26,7 +26,7 @@ public class FakeDataBase {
      * @param productNumber - Contains the product number to be matched.
      * @return - returns Product object.
      */
-    public final Product getProductDescription(String productNumber){
+    public final Product getProductInformation(String productNumber){
         int index = 0;
         for(int i = 0; i <= products.length - 1 ; i++){
             if (productNumber.equals(products[i].getProductCode())){

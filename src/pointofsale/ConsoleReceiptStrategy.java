@@ -44,8 +44,8 @@ public class ConsoleReceiptStrategy implements ReceiptStrategy {
         customer = database.getCustomerInformation(customerNumber);
         this.customerNumber = customer.getCustomerNumber();
         customer.addReceiptToHistory(receiptNumber);
-//        product = database.getProductDescription(productID);
-        lineItem = new LineItem(database.getProductDescription(productID), quantity);
+//        product = database.getProductInformation(productID);
+        lineItem = new LineItem(database.getProductInformation(productID), quantity);
         lineItems[0] = lineItem;
     }
     
@@ -61,7 +61,7 @@ public class ConsoleReceiptStrategy implements ReceiptStrategy {
             throw new IllegalArgumentException(
                     "error: lineItem cannot be null");
         }
-        lineItem = new LineItem(database.getProductDescription(productID), quantity);
+        lineItem = new LineItem(database.getProductInformation(productID), quantity);
         LineItem [] tempArray = new LineItem[lineItems.length + 1];
         System.arraycopy(lineItems, 0, tempArray, 0, lineItems.length);
         tempArray[lineItems.length] = lineItem;
