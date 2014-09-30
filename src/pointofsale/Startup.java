@@ -14,15 +14,13 @@ public class Startup {
     public static void main(String[] args) {
         POSRegister register = new POSRegister();
         register.setFirstLineItem(1, "00004", "3");
-        register.setNextLineItem(1, "00002", "3");
-        System.out.println(register.getReceipt());
+        register.setNextLineItem(1, "00002");
+        register.getConsoleReceipt();
         
         POSRegister register2 = new POSRegister();
         register2.setFirstLineItem(1, "00001", "2");
-        register2.setNextLineItem(1, "00002", "2");
-        register2.setNextLineItem(1, "00003", "2");
-        System.out.println(register2.getReceipt());
-        
+        register2.setNextLineItem(1, "00002");
+        register2.setNextLineItem(1, "00003");
+        register2.getConsoleReceipt();
     }
-    
 }

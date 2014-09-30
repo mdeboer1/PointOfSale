@@ -39,12 +39,10 @@ public class POSRegister {
         receipt.setFirstLineItem(lineItem, customer);
     }
     
-    public void setNextLineItem(int quantity, String productID, String customerNumber){
-        if (quantity < 1 || productID == null || productID.equals(" ") || customerNumber == null 
-                || customerNumber.equals(" ")){
+    public void setNextLineItem(int quantity, String productID){
+        if (quantity < 1 || productID == null || productID.equals(" ")){
             throw new IllegalArgumentException(
-                    "error: Quantity must be a least one and productID and custemer"
-                            + "number must be Strings");
+                    "error: Quantity must be a least one and productID must be a String");
         }
         product = database.getProductDescription(productID);
         lineItem = new LineItem(product, quantity);
@@ -55,7 +53,7 @@ public class POSRegister {
         return receipt.getReceiptNumber();
     }
     
-    public String getReceipt(){
-        return receipt.getReceipt();
+    public String getConsoleReceipt(){
+        return receipt.getConsoleReceipt();
     }
 }    

@@ -11,15 +11,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- *
+ *This class creates the receipt.  It uses a custom constructor to create the
+ receipt number and adds one to receiptNumberIncrementer (which actually just
+ counts the number of objects created) that is used for incrementing the receipt
+ number by one.  Line items are added in either the setFirstLineItem or setNewLineItem
+ because different things occur if it is the first line item or not.  getConsoleReceipt
+ method creates the formatting for the receipt as it is shown in the console
+ output
  * @author mdeboer1
- * This class creates the receipt.  It uses a custom constructor to create the
- * receipt number and adds one to receiptNumberIncrementer (which actually just
- * counts the number of objects created) that is used for incrementing the receipt
- * number by one.  Line items are added in either the setFirstLineItem or setNewLineItem
- * because different things occur if it is the first line item or not.  getReceipt
- * method creates the formatting for the receipt as it is shown in the console
- * output
+ 
  */
 public class Receipt {
     //Static variable to count number of objects created, to be used for receiptNumber property
@@ -35,7 +35,6 @@ public class Receipt {
     private double taxAmount;
     private double grandTotal;
     private String customerNumber;
-    
     private LineItem [] lineItems = new LineItem[1];
     
     public Receipt(){
@@ -72,7 +71,7 @@ public class Receipt {
         lineItems = tempArray;
     }
     
-    public String getReceipt(){
+    public String getConsoleReceipt(){
 //        NumberFormat nf = NumberFormat.getCurrencyInstance();
 //        DecimalFormat df = new DecimalFormat("#0.00");
         Calendar currentDate = Calendar.getInstance(); //Get the current date
