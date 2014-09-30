@@ -96,17 +96,7 @@ public class Receipt {
                 "\nReceipt Number: " + receiptNumber);
         for (int i = 0; i <= lineItems.length - 1; i++){
             if (i == 0){
-//                if (lineItems[i].getDiscountAmount() < 1){
-//                    product.getAmountSavedPerLine() = (lineItems[i].getDiscountAmount() * 
-//                            (lineItems[i].getPrice() * lineItems[i].getQuantity()));
-//                }
-//                else {
-//                    amountSavedPerLineItem = (lineItems[i].getDiscountAmount() * 
-//                            lineItems[i].getQuantity());
-//                }
                 grandTotalOfDiscount += lineItems[i].getAmountSavedPerLine();
-//                extendedPrice = (lineItems[i].getPrice() * lineItems[i].getQuantity()) 
-//                        - lineItems[i].getAmountSavedPerLine();
                 subtotal += lineItems[i].getExtendedPrice();
                 System.out.println("Customer Number: " + customerNumber +
                         "\n---------------------------------------------------------------\n");

@@ -33,8 +33,9 @@ public class LineItem {
         setDiscountAmount(product.getDiscountAmount());
         setQuantity(quantity);
         setPrice(product.getPrice());
-        setExtendedPrice();
         setAmountSavedPerLine();
+        setExtendedPrice();
+        
     }
     
     /**
