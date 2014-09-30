@@ -5,8 +5,6 @@
  */
 package pointofsale;
 
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -28,8 +26,6 @@ public class Receipt {
     private final int receiptNumber;
     private String storeName = "Kohl's Department Store";
     private String thankYou = "\n\t\tThank you for shopping at Kohl's!\n\n";
-    private double extendedPrice;
-    private double amountSavedPerLineItem;
     private double grandTotalOfDiscount;
     private double subtotal;
     private double taxes = .051;
@@ -40,6 +36,7 @@ public class Receipt {
     private FakeDataBase database;
     private LineItem lineItem;
     private Customer customer;
+//    private Product product;
     
     /**
      * Constructor for creating a receipt.  Takes all the information in the 
@@ -56,6 +53,7 @@ public class Receipt {
         customer = database.getCustomerInformation(customerNumber);
         this.customerNumber = customer.getCustomerNumber();
         customer.addReceiptToHistory(receiptNumber);
+//        product = database.getProductDescription(productID);
         lineItem = new LineItem(database.getProductDescription(productID), quantity);
         lineItems[0] = lineItem;
     }
@@ -91,8 +89,6 @@ public class Receipt {
      * @return 
      */
     public final String getConsoleReceipt(){
-//        NumberFormat nf = NumberFormat.getCurrencyInstance();
-//        DecimalFormat df = new DecimalFormat("#0.00");
         Calendar currentDate = Calendar.getInstance(); //Get the current date
         SimpleDateFormat formatter= new SimpleDateFormat("MMM dd yyyy HH:mm:ss"); //format it as per your requirement
         String getTodaysDate = formatter.format(currentDate.getTime());
@@ -100,81 +96,36 @@ public class Receipt {
                 "\nReceipt Number: " + receiptNumber);
         for (int i = 0; i <= lineItems.length - 1; i++){
             if (i == 0){
-                if (lineItems[i].getDiscountAmount() < 1){
-                    amountSavedPerLineItem = (lineItems[i].getDiscountAmount() * 
-                            (lineItems[i].getPrice() * lineItems[i].getQuantity()));
-                }
-                else {
-                    amountSavedPerLineItem = (lineItems[i].getDiscountAmount() * 
-                            lineItems[i].getQuantity());
-                }
-                grandTotalOfDiscount += amountSavedPerLineItem;
-                extendedPrice = (lineItems[i].getPrice() * lineItems[i].getQuantity()) 
-                        - amountSavedPerLineItem;
-                subtotal += extendedPrice;
-//                nf.format(amountSavedPerLineItem);
-//                nf.format(grandTotalOfDiscount);
-//                nf.format(extendedPrice);
-//                nf.format(subtotal);
-//                df.format(amountSavedPerLineItem);
-//                df.format(grandTotalOfDiscount);
-//                df.format(extendedPrice);
-//                df.format(subtotal);    
+//                if (lineItems[i].getDiscountAmount() < 1){
+//                    product.getAmountSavedPerLine() = (lineItems[i].getDiscountAmount() * 
+//                            (lineItems[i].getPrice() * lineItems[i].getQuantity()));
+//                }
+//                else {
+//                    amountSavedPerLineItem = (lineItems[i].getDiscountAmount() * 
+//                            lineItems[i].getQuantity());
+//                }
+                grandTotalOfDiscount += lineItems[i].getAmountSavedPerLine();
+//                extendedPrice = (lineItems[i].getPrice() * lineItems[i].getQuantity()) 
+//                        - lineItems[i].getAmountSavedPerLine();
+                subtotal += lineItems[i].getExtendedPrice();
                 System.out.println("Customer Number: " + customerNumber +
                         "\n---------------------------------------------------------------\n");
                 System.out.printf("%s \t %s \t %d \t %.2f \t %.2f \t %.2f \n", lineItems[i].getProductNumber(),
                         lineItems[i].getProductDescription(), lineItems[i].getQuantity(),
-                        lineItems[i].getPrice(), amountSavedPerLineItem, extendedPrice);
-//                System.out.println("\nCustomer Number: " + lineItems[i].getCustomerNumber() +
-//                        "\n---------------------------------------------------------------\n" +
-//                        lineItems[i].getProductNumber() + "\t" + lineItems[i].getProductDescription() + 
-//                        "\t" + lineItems[i].getQuantity() + "\t" + lineItems[i].getPrice() + 
-//                        "\t" + amountSavedPerLineItem + "\t" + extendedPrice);
+                        lineItems[i].getPrice(), lineItems[i].getAmountSavedPerLine(), lineItems[i].getExtendedPrice());
             }
             if (i > 0 && (!(i > lineItems.length - 1))){
-                if (lineItems[i].getDiscountAmount() < 1){
-                    amountSavedPerLineItem = (lineItems[i].getDiscountAmount() * 
-                            (lineItems[i].getPrice() * lineItems[i].getQuantity()));
-                }
-                else {
-                    amountSavedPerLineItem = (lineItems[i].getDiscountAmount() * 
-                            lineItems[i].getQuantity());
-                }
-                grandTotalOfDiscount += amountSavedPerLineItem;
-                extendedPrice = (lineItems[i].getPrice() * lineItems[i].getQuantity()) 
-                        - amountSavedPerLineItem;
-                subtotal += extendedPrice;
-//                nf.format(amountSavedPerLineItem);
-//                nf.format(grandTotalOfDiscount);
-//                nf.format(extendedPrice);
-//                nf.format(subtotal);
-//                df.format(amountSavedPerLineItem);
-//                df.format(grandTotalOfDiscount);
-//                df.format(extendedPrice);
-//                df.format(subtotal);
+                grandTotalOfDiscount += lineItems[i].getAmountSavedPerLine();
+                subtotal += lineItems[i].getExtendedPrice();
                 System.out.printf("%s \t %s \t %d \t %.2f \t %.2f \t %.2f \n", lineItems[i].getProductNumber(),
                         lineItems[i].getProductDescription(), lineItems[i].getQuantity(),
-                        lineItems[i].getPrice(), amountSavedPerLineItem, extendedPrice);
-//                System.out.println(lineItems[i].getProductNumber() + "\t" + lineItems[i].getProductDescription() 
-//                    + "\t" + lineItems[i].getQuantity() + "\t" + lineItems[i].getPrice() + 
-//                    "\t" + amountSavedPerLineItem + "\t" + extendedPrice);
+                        lineItems[i].getPrice(), lineItems[i].getAmountSavedPerLine(), lineItems[i].getExtendedPrice());
             }
         }
         taxAmount = subtotal * taxes;
         grandTotal = subtotal + taxAmount;
-//        nf.format(taxes);
-//        nf.format(taxAmount);
-//        nf.format(grandTotal);
-//        df.format(taxes);
-//        df.format(taxAmount);
-//        df.format(grandTotal);
         System.out.printf("\n\t\t\t\tTotal Saved: \t %.2f \n\t\t\t\tSubtotal: \t%.2f" +
           "\n\t\t\t\tTaxes: \t\t %.2f \n\t\t\t\tGrand Total: \t%.2f\n",grandTotalOfDiscount,subtotal,taxes,grandTotal);
-//        System.out.println("\n\t\t\t\t\tTotal Saved: " + grandTotalOfDiscount +
-//                "\n\t\t\t\t\tSubtotal: " + subtotal + "\n" + "\t\t\t\t\tTaxes: " + 
-//                taxAmount + "\n\t\t\t\t\tGrand Total: " + grandTotal + "\n");        
-//                
         return thankYou;
-        
     }
 }

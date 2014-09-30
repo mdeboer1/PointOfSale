@@ -13,6 +13,8 @@ package pointofsale;
 public class LineItem {
     private Product product;
     private int quantity;
+    private double extendedPrice;
+    private double amountSavedPerLineItem;
     private String productNumber;
     private String productDescription;
     private double price;
@@ -31,7 +33,38 @@ public class LineItem {
         setDiscountAmount(product.getDiscountAmount());
         setQuantity(quantity);
         setPrice(product.getPrice());
+        setExtendedPrice();
+        setAmountSavedPerLine();
     }
+    
+    /**
+     * Returns the extended price of the line item.
+     * @return - extendedPrice.
+     */
+    public final double getExtendedPrice(){
+        return extendedPrice;
+    }
+    
+    private void setExtendedPrice(){
+        extendedPrice = quantity * price - amountSavedPerLineItem;
+    }
+    
+    /**
+     * Returns the total amount saved per line
+     * @return - amountSavedPerLineItem;
+     */
+    public final double getAmountSavedPerLine(){
+        return amountSavedPerLineItem;
+    }
+    
+    private void setAmountSavedPerLine(){
+        if (discountAmount < 1){
+            amountSavedPerLineItem = quantity * (discountAmount * price);
+        }
+        else if (discountAmount > 1){
+            amountSavedPerLineItem = quantity * discountAmount;
+        }
+    }    
     
     /**
      * Gets the products price.
