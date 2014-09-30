@@ -8,9 +8,11 @@ package pointofsale;
 /**
  *
  * @author mdeboer1
+ * @version 1.00
  * This is the startup class to test and run the POS project.
  */
 public class Startup {
+    
     public static void main(String[] args) {
         POSRegister register = new POSRegister(1, "00004", "3");
         register.addNewLineItem(1, "00002");

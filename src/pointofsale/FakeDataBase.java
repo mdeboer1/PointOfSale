@@ -11,6 +11,7 @@ package pointofsale;
  * information passed from the POSRegister class to select the correct customer and
  * product numbers.
  * @author mdeboer1
+ * @version 1.00
  * 
  */
 public class FakeDataBase {
@@ -25,6 +26,12 @@ public class FakeDataBase {
     private Product product4 = new Product("Jeans  ", "00004", 59.95, new PercentageDiscountStrategy());
     private Product[] products = {product1, product2, product3, product4};
     
+    /**
+     * This method receives a product number and iterates through the products
+     * array to match the product being purchased.
+     * @param productNumber - Contains the product number to be matched.
+     * @return - returns Product object.
+     */
     public final Product getProductDescription(String productNumber){
         int index = 0;
         for(int i = 0; i <= products.length - 1 ; i++){
@@ -35,6 +42,12 @@ public class FakeDataBase {
         return products[index];
     }
     
+    /**
+     * This method receives a customer number and iterates through the customers
+     * array to match the customer who is making the purchase.
+     * @param customerNumber - Contains the customer number to be matched.
+     * @return - returns Customer object.
+     */
     public final Customer getCustomerInformation(String customerNumber){
         int index = 0;
         for(int i = 0; i <= customers.length - 1; i++){
@@ -45,6 +58,10 @@ public class FakeDataBase {
         return customers[index];
     }    
     
+    /**
+     * Allows a new customer to be added to the customers array.
+     * @param customerNumber - Contains the customer number to be added.
+     */
     public final void addCustomerToArray(String customerNumber){
         if (customerNumber == null ||customerNumber.equals(" ")){
              throw new IllegalArgumentException(
@@ -57,6 +74,13 @@ public class FakeDataBase {
         customers = tempArray;
     }
     
+    /**
+     * Allows a product with a DiscountStrategy to be added to the products array.
+     * @param productDescription - Contains the description of the product.
+     * @param productNumber - Contains the product number.
+     * @param price - Contains the price of the product.
+     * @param discount - Contains the DiscountStrategy object.
+     */
     public final void addProductToArrayWithDiscount(String productDescription, String productNumber, double price, DiscountStrategy discount){
         if(productDescription == null || productDescription.equals(" ")){
             throw new IllegalArgumentException(
@@ -81,6 +105,12 @@ public class FakeDataBase {
         products = tempArray;
     }
     
+    /**
+     * This allows a product without a preset DiscountStrategy to be added to products array.
+     * @param productDescription - Contains the description of the product.
+     * @param productNumber - Contains the product number.
+     * @param price - Contains the price of the product. 
+     */
     public final void addProductToArrayWithoutDiscount(String productDescription, String productNumber, double price){
         if(productDescription == null || productDescription.equals(" ")){
             throw new IllegalArgumentException(

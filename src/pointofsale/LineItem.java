@@ -6,9 +6,9 @@
 package pointofsale;
 
 /**
- *
+ * This class creates each line item that is shown on the receipt. 
  * @author mdeboer1
- * This class creates each line item that is shown on the receipt.  
+ * @version 1.00 
  */
 public class LineItem {
     private Product product;
@@ -16,9 +16,13 @@ public class LineItem {
     private String productNumber;
     private String productDescription;
     private double price;
-    
     private double discountAmount;
     
+    /**
+     * Custom constructor for making the line items.
+     * @param product - Contains the product number.
+     * @param quantity - Contains the quantity.
+     */
     public LineItem(Product product, int quantity){
         this.product = product;
         setQuantity(quantity);
@@ -29,10 +33,14 @@ public class LineItem {
         setPrice(product.getPrice());
     }
     
-    public void getProductPrice(){
-        product.getPrice();
+    /**
+     * Gets the products price.
+     * @return - returns the price of the product.
+     */
+    public final double getProductPrice(){
+        return product.getPrice();
     }
-    
+
     private void setQuantity(int quantity){
         if(quantity < 1){
             throw new IllegalArgumentException(
@@ -41,11 +49,19 @@ public class LineItem {
         this.quantity = quantity;
     }
 
-    public int getQuantity() {
+    /**
+     * Returns the quantity purchased.
+     * @return - returns quantity.
+     */
+    public final int getQuantity() {
         return quantity;
     }
 
-    public String getProductNumber() {
+    /**
+     * Returns the product number.
+     * @return - returns productNumber.
+     */
+    public final String getProductNumber() {
         return productNumber;
     }
 
@@ -57,7 +73,11 @@ public class LineItem {
         this.productNumber = productNumber;
     }
 
-    public String getProductDescription() {
+    /**
+     * Returns the description of the product.
+     * @return - returns productDescription.
+     */
+    public final String getProductDescription() {
         return productDescription;
     }
 
@@ -69,7 +89,11 @@ public class LineItem {
         this.productDescription = productDescription;
     }
 
-    public double getPrice() {
+    /**
+     * Returns the price of the product.
+     * @return - returns price.
+     */
+    public final double getPrice() {
         return price;
     }
 
@@ -81,7 +105,11 @@ public class LineItem {
         this.price = price;
     }
 
-    public double getDiscountAmount() {
+    /**
+     * Returns the discount amount of the product (not the DiscountStrategy object).
+     * @return - returns the discountAmount.
+     */
+    public final double getDiscountAmount() {
         return discountAmount;
     }
 

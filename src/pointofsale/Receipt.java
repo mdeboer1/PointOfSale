@@ -19,6 +19,7 @@ import java.util.Calendar;
  method creates the formatting for the receipt as it is shown in the console
  output
  * @author mdeboer1
+ * @version 1.00
  
  */
 public class Receipt {
@@ -40,6 +41,14 @@ public class Receipt {
     private LineItem lineItem;
     private Customer customer;
     
+    /**
+     * Constructor for creating a receipt.  Takes all the information in the 
+     * constructor and creates the first line item.  Subsequent line items created
+     * in method below.
+     * @param quantity - Contains the quantity of items passed from POSRegister.
+     * @param productID - Contains the product ID of the items passed from POSRegister.
+     * @param customerNumber - Contains the customer number passed from POSRegister
+     */
     public Receipt(int quantity, String productID, String customerNumber){
         receiptNumber = receiptNumberIncrementer;
         receiptNumberIncrementer++;
@@ -50,11 +59,21 @@ public class Receipt {
         lineItem = new LineItem(database.getProductDescription(productID), quantity);
         lineItems[0] = lineItem;
     }
-
-    public int getReceiptNumber() {
+    
+    /**
+     * Returns the receipt number
+     * @return 
+     */
+    public final int getReceiptNumber() {
         return receiptNumber;
     }
     
+    /**
+     * Allows additional line items to be created for a receipt with multiple
+     * purchases.
+     * @param quantity - Contains the quantity of items passed from POSRegister.
+     * @param productID - Contains the product ID of the items passed from POSRegister.
+     */
     public final void addNewLineItem(int quantity, String productID){
         if (lineItem == null){
             throw new IllegalArgumentException(
@@ -67,6 +86,10 @@ public class Receipt {
         lineItems = tempArray;
     }
     
+    /**
+     * Returns a fully formatted console receipt.
+     * @return 
+     */
     public final String getConsoleReceipt(){
 //        NumberFormat nf = NumberFormat.getCurrencyInstance();
 //        DecimalFormat df = new DecimalFormat("#0.00");

@@ -6,12 +6,17 @@
 package pointofsale;
 
 /**
- *
- * @author mdeboer1
  * This is the pure abstraction layer for the DIP and Strategy patterns.
+ * @author mdeboer1
+ * @version 1.00
  */
 public interface DiscountStrategy {
     
+    /**
+     * This is the method that must be overridden in any implementing class
+     * of this Discount Strategy.
+     * @return 
+     */
     public abstract double getDiscountAmount();
     
 }

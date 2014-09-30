@@ -6,10 +6,10 @@
 package pointofsale;
 
 /**
- *
- * @author mdeboer1
  * This class creates a simple customer example existing of only a customerNumber
- * property and an array to store receiptHistory.
+ * property and an array to store receiptHistory. 
+ * @author mdeboer1
+ * @version 1.00
  */
 public class Customer {
     private String customerNumber;
@@ -30,8 +30,13 @@ public class Customer {
         }
         this.customerNumber = customerNumber;
     }
-    
-    public void addReceiptToHistory(int receiptNumber){
+    /**
+     * This method allows the Customer class to store all the receipt numbers
+     * for that particular Customer instance
+     * @param receiptNumber - Used to append the receiptNumber to receiptHistory
+     * array
+     */
+    public final void addReceiptToHistory(int receiptNumber){
         if (receiptNumber <= 0){
             throw new IllegalArgumentException(
                 "error: receiptNumber must be greater than zero");
