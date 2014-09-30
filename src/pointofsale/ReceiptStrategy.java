@@ -11,7 +11,7 @@ package pointofsale;
  * @version 1.00
  */
 public interface ReceiptStrategy {
-    public abstract void addItem(Object item);
-    public abstract double getGrandTotal();
-    
+    public abstract void addNewLineItem(int quantity, String productID);
+    public abstract String getReceipt();
+    public abstract int getReceiptNumber();
 }
