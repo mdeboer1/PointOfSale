@@ -24,14 +24,15 @@ public class POSRegister {
      * @param customerNumber - Contains customerNumber received from Startup class, passes it to
      * Receipt constructor. 
      */
-    public POSRegister(int quantity, String productID, String customerNumber){ //take custNum as argument, send to Receipt constructor
+    public POSRegister(int quantity, String productID, String customerNumber,
+            ReceiptStrategy receiptStrategy){ //take custNum as argument, send to Receipt constructor
         if (quantity < 1 || productID == null || productID.equals(" ") || customerNumber == null 
                 || customerNumber.equals(" ")){
             throw new IllegalArgumentException(
                     "error: Quantity must be a least one and productID and custemer"
                             + "number must be Strings");
         }
-        this.receipt = new Receipt(quantity, productID, customerNumber); 
+        this.receipt = new Receipt(quantity, productID, customerNumber, receiptStrategy); 
     }
     
     /**
@@ -62,6 +63,6 @@ public class POSRegister {
      */
     public final void generateConsoleReceipt(){
 //        receipt.getConsoleReceipt();
-        receipt.outputConsoleReceiptStrategy();
+        receipt.outputReceiptStrategy();
     }
 }    

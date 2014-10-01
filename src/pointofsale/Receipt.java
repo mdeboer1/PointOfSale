@@ -26,14 +26,8 @@ public class Receipt {
     private final int receiptNumber;
     private String storeName = "Kohl's Department Store";
     private String thankYou = "\n\t\tThank you for shopping at Kohl's!\n\n";
-//    private double grandTotalOfDiscount;
-//    private double subtotal;
-//    private double taxes = .051;
-//    private double taxAmount;
-//    private double grandTotal;
-    private String customerNumber;
     private LineItem [] lineItems = new LineItem[1];
-    private FakeDataBase database;
+    private DatabaseStrategy database;
     private LineItem lineItem;
     private Customer customer;
     private ReceiptStrategy receiptStrategy;
@@ -45,22 +39,31 @@ public class Receipt {
      * @param quantity - Contains the quantity of items passed from POSRegister.
      * @param productID - Contains the product ID of the items passed from POSRegister.
      * @param customerNumber - Contains the customer number passed from POSRegister
+     * @param receiptStrategy - object of the Receipt Strategy
      */
-    public Receipt(int quantity, String productID, String customerNumber){
+    public Receipt(int quantity, String productID, String customerNumber, ReceiptStrategy receiptStrategy){
+        if (quantity < 1 || productID == null || productID.equals(" ") || customerNumber == null 
+                || customerNumber.equals(" ")){
+            throw new IllegalArgumentException(
+                    "error: Quantity must be a least one and productID and custemer"
+                            + "number must be Strings");
+        }
+        this.receiptStrategy = receiptStrategy;
         receiptNumber = receiptNumberIncrementer;
         receiptNumberIncrementer++;
         database = new FakeDataBase();
         customer = database.getCustomerInformation(customerNumber);
-        this.customerNumber = customer.getCustomerNumber();
         customer.addReceiptToHistory(receiptNumber);
-//        product = database.getProductDescription(productID);
         lineItem = new LineItem(database.getProductInformation(productID), quantity);
         lineItems[0] = lineItem;
     }
     
-    public final void outputConsoleReceiptStrategy(){
-        receiptStrategy = new ConsoleReceiptStrategy();
-        receiptStrategy.generateReceipt(customer, lineItems, receiptNumber);
+    /**
+     * This method gets the receipt output from whatever class of the Receipt Strategy
+     * that was passed in from the startup class
+     */
+    public final void outputReceiptStrategy(){
+         receiptStrategy.generateReceipt(customer, lineItems, receiptNumber);
     }
     
     /**
@@ -88,40 +91,4 @@ public class Receipt {
         tempArray[lineItems.length] = lineItem;
         lineItems = tempArray;
     }
-    
-//    /**
-//     * Returns a fully formatted console receipt.
-//     * 
-//     */
-//    public final void getConsoleReceipt(){
-//        Calendar currentDate = Calendar.getInstance(); //Get the current date
-//        SimpleDateFormat formatter= new SimpleDateFormat("MMM dd yyyy HH:mm:ss"); //format it as per your requirement
-//        String getTodaysDate = formatter.format(currentDate.getTime());
-//        System.out.println(storeName + "\n" + "Date: " + getTodaysDate + 
-//                "\nReceipt Number: " + receiptNumber);
-//        for (int i = 0; i <= lineItems.length - 1; i++){
-//            if (i == 0){
-//                grandTotalOfDiscount += lineItems[i].getAmountSavedPerLine();
-//                subtotal += lineItems[i].getExtendedPrice();
-//                System.out.println("Customer Number: " + customerNumber +
-//                        "\n---------------------------------------------------------------\n");
-//                System.out.printf("%s \t %s \t %d \t %.2f \t %.2f \t %.2f \n", lineItems[i].getProductNumber(),
-//                        lineItems[i].getProductDescription(), lineItems[i].getQuantity(),
-//                        lineItems[i].getPrice(), lineItems[i].getAmountSavedPerLine(), lineItems[i].getExtendedPrice());
-//            }
-//            if (i > 0 && (!(i > lineItems.length - 1))){
-//                grandTotalOfDiscount += lineItems[i].getAmountSavedPerLine();
-//                subtotal += lineItems[i].getExtendedPrice();
-//                System.out.printf("%s \t %s \t %d \t %.2f \t %.2f \t %.2f \n", lineItems[i].getProductNumber(),
-//                        lineItems[i].getProductDescription(), lineItems[i].getQuantity(),
-//                        lineItems[i].getPrice(), lineItems[i].getAmountSavedPerLine(), lineItems[i].getExtendedPrice());
-//            }
-//        }
-//        taxAmount = subtotal * taxes;
-//        grandTotal = subtotal + taxAmount;
-//        System.out.printf("\n\t\t\t\tTotal Saved: \t %.2f \n\t\t\t\tSubtotal: \t%.2f" +
-//          "\n\t\t\t\tTaxes: \t\t %.2f \n\t\t\t\tGrand Total: \t%.2f\n%s",
-//                grandTotalOfDiscount,subtotal,taxes,grandTotal, thankYou);
-//        
-//    }
 }

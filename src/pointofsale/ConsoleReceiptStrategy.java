@@ -10,7 +10,11 @@ import java.util.Calendar;
 
 /**
  * This class generates a receipt that is output to the console, and is an 
- * implementation of the ReceiptStrategy interface.
+ * implementation of the ReceiptStrategy interface.  This class deliberately
+ * violates a portion of the DIP as it receives a Customer and LineItem object as
+ * arguments from the Receipt.  This was done intentionally to make the code
+ * simpler to understand and easier to maintain because the only alternative
+ * was to pass in all the data from the receipt!
  * @author mdeboer1
  * @version 1.00
  */
@@ -47,14 +51,14 @@ public class ConsoleReceiptStrategy implements ReceiptStrategy {
                         "\n---------------------------------------------------------------\n");
                 System.out.printf("%s \t %s \t %d \t %.2f \t %.2f \t %.2f \n", lineItems[i].getProductNumber(),
                         lineItems[i].getProductDescription(), lineItems[i].getQuantity(),
-                        lineItems[i].getPrice(), lineItems[i].getAmountSavedPerLine(), lineItems[i].getExtendedPrice());
+                        lineItems[i].getProductPrice(), lineItems[i].getAmountSavedPerLine(), lineItems[i].getExtendedPrice());
             }
             if (i > 0 && (!(i > lineItems.length - 1))){
                 grandTotalOfDiscount += lineItems[i].getAmountSavedPerLine();
                 subtotal += lineItems[i].getExtendedPrice();
                 System.out.printf("%s \t %s \t %d \t %.2f \t %.2f \t %.2f \n", lineItems[i].getProductNumber(),
                         lineItems[i].getProductDescription(), lineItems[i].getQuantity(),
-                        lineItems[i].getPrice(), lineItems[i].getAmountSavedPerLine(), lineItems[i].getExtendedPrice());
+                        lineItems[i].getProductPrice(), lineItems[i].getAmountSavedPerLine(), lineItems[i].getExtendedPrice());
             }
         }
         taxAmount = subtotal * taxes;

@@ -14,13 +14,15 @@ package pointofsale;
 public class Startup {
     
     public static void main(String[] args) {
-        POSRegister register = new POSRegister(1, "00004", "3");
+//        POSRegister register = new POSRegister(1, "00004", "3", new FakeDatabase(),newConsoleReceiptStrategy());
+        POSRegister register = new POSRegister(1, "00004", "3", new ConsoleReceiptStrategy());
         register.addNewLineItem(1, "00002");
         register.generateConsoleReceipt();
         
-        POSRegister register2 = new POSRegister(1, "00001", "2");
+        POSRegister register2 = new POSRegister(1, "00001", "2", new ConsoleReceiptStrategy());
         register2.addNewLineItem(1, "00002");
         register2.addNewLineItem(1, "00003");
         register2.generateConsoleReceipt();
     }
+    //check magic numbers and strings
 }

@@ -14,7 +14,7 @@ package pointofsale;
  * @version 1.00
  * 
  */
-public class FakeDataBase {
+public class FakeDataBase implements DatabaseStrategy {
     private Customer [] customers = {new Customer("1"), new Customer("2"), new Customer("3"), new Customer("4")};
     private Product[] products = {new Product("Hat    ", "00001", 19.95, new PercentageDiscountStrategy()),
             new Product("T-Shirt", "00002", 15.99), new Product("Robe   ", "00003", 39.95, new FlatRateDiscountStrategy())
@@ -26,6 +26,7 @@ public class FakeDataBase {
      * @param productNumber - Contains the product number to be matched.
      * @return - returns Product object.
      */
+    @Override
     public final Product getProductInformation(String productNumber){
         int index = 0;
         for(int i = 0; i <= products.length - 1 ; i++){
@@ -42,6 +43,7 @@ public class FakeDataBase {
      * @param customerNumber - Contains the customer number to be matched.
      * @return - returns Customer object.
      */
+    @Override
     public final Customer getCustomerInformation(String customerNumber){
         int index = 0;
         for(int i = 0; i <= customers.length - 1; i++){

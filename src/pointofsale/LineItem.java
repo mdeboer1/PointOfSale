@@ -15,10 +15,6 @@ public class LineItem {
     private int quantity;
     private double extendedPrice;
     private double amountSavedPerLineItem;
-    private String productNumber;
-    private String productDescription;
-    private double price;
-    private double discountAmount;
     
     /**
      * Custom constructor for making the line items.
@@ -28,11 +24,11 @@ public class LineItem {
     public LineItem(Product product, int quantity){
         this.product = product;
         setQuantity(quantity);
-        setProductNumber(product.getProductCode());
-        setProductDescription(product.getProductDescription());
-        setDiscountAmount(product.getDiscountAmount());
+//        setProductNumber(product.getProductCode());
+//        setProductDescription(product.getProductDescription());
+//        setDiscountAmount(product.getDiscountAmount());
         setQuantity(quantity);
-        setPrice(product.getPrice());
+//        setPrice(product.getPrice());
         setAmountSavedPerLine();
         setExtendedPrice();
         
@@ -47,7 +43,8 @@ public class LineItem {
     }
     
     private void setExtendedPrice(){
-        extendedPrice = quantity * price - amountSavedPerLineItem;
+//        extendedPrice = quantity * price - amountSavedPerLineItem;
+        extendedPrice = quantity * product.getPrice() - amountSavedPerLineItem;
     }
     
     /**
@@ -59,11 +56,11 @@ public class LineItem {
     }
     
     private void setAmountSavedPerLine(){
-        if (discountAmount < 1){
-            amountSavedPerLineItem = quantity * (discountAmount * price);
+        if (product.getDiscountAmount() < 1){
+            amountSavedPerLineItem = quantity * (product.getDiscountAmount() * product.getPrice());
         }
-        else if (discountAmount > 1){
-            amountSavedPerLineItem = quantity * discountAmount;
+        else if (product.getDiscountAmount() > 1){
+            amountSavedPerLineItem = quantity * getDiscountAmount();
         }
     }    
     
@@ -92,68 +89,28 @@ public class LineItem {
     }
 
     /**
-     * Returns the product number.
-     * @return - returns productNumber.
-     */
-    public final String getProductNumber() {
-        return productNumber;
-    }
-
-    private void setProductNumber(String productNumber) {
-        if (productNumber == null || productNumber.equals(" ")){
-            throw new IllegalArgumentException(
-                    "error: product number must be a valid String");
-        }
-        this.productNumber = productNumber;
-    }
-
-    /**
-     * Returns the description of the product.
-     * @return - returns productDescription.
-     */
-    public final String getProductDescription() {
-        return productDescription;
-    }
-
-    private void setProductDescription(String productDescription) {
-        if (productDescription == null || productDescription.equals(" ")){
-            throw new IllegalArgumentException(
-                    "error: product description must be a valid String");
-        }
-        this.productDescription = productDescription;
-    }
-
-    /**
-     * Returns the price of the product.
-     * @return - returns price.
-     */
-    public final double getPrice() {
-        return price;
-    }
-
-    private void setPrice(double price) {
-        if (price <= 0){
-            throw new IllegalArgumentException(
-                    "error: price must be greater than zero");
-        }
-        this.price = price;
-    }
-
-    /**
      * Returns the discount amount of the product (not the DiscountStrategy object).
      * @return - returns the discountAmount.
      */
     public final double getDiscountAmount() {
-        return discountAmount;
-    }
-
-    private void setDiscountAmount(double discountAmount) {
-        if (discountAmount < 0){
-            throw new IllegalArgumentException(
-                    "error: discount must be atleast zero or higher");
-        }
-        this.discountAmount = discountAmount;
+        return product.getDiscountAmount();
     }
     
+    /**
+     * This getter provided so receipt is able to retrieve the product description
+     * from the lineItem since receipt should not know about the product directly.
+     * @return 
+     */
+    public final String getProductDescription(){
+        return product.getProductDescription();
+    }
     
+    /**
+     * This getter provided so receipt is able to retrieve the product number
+     * from the lineItem since receipt should not know about the product directly.
+     * @return 
+     */
+    public final String getProductNumber(){
+        return product.getProductCode();
+    }
 }
