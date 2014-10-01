@@ -36,7 +36,7 @@ public class Receipt {
     private FakeDataBase database;
     private LineItem lineItem;
     private Customer customer;
-//    private Product product;
+    private ReceiptStrategy receiptStrategy;
     
     /**
      * Constructor for creating a receipt.  Takes all the information in the 
@@ -56,6 +56,11 @@ public class Receipt {
 //        product = database.getProductDescription(productID);
         lineItem = new LineItem(database.getProductInformation(productID), quantity);
         lineItems[0] = lineItem;
+    }
+    
+    public final void outputConsoleReceiptStrategy(){
+        receiptStrategy = new ConsoleReceiptStrategy();
+        receiptStrategy.generateReceipt(customer, lineItems, receiptNumber);
     }
     
     /**
@@ -86,9 +91,9 @@ public class Receipt {
     
     /**
      * Returns a fully formatted console receipt.
-     * @return 
+     * 
      */
-    public final String getConsoleReceipt(){
+    public final void getConsoleReceipt(){
         Calendar currentDate = Calendar.getInstance(); //Get the current date
         SimpleDateFormat formatter= new SimpleDateFormat("MMM dd yyyy HH:mm:ss"); //format it as per your requirement
         String getTodaysDate = formatter.format(currentDate.getTime());
@@ -115,7 +120,8 @@ public class Receipt {
         taxAmount = subtotal * taxes;
         grandTotal = subtotal + taxAmount;
         System.out.printf("\n\t\t\t\tTotal Saved: \t %.2f \n\t\t\t\tSubtotal: \t%.2f" +
-          "\n\t\t\t\tTaxes: \t\t %.2f \n\t\t\t\tGrand Total: \t%.2f\n",grandTotalOfDiscount,subtotal,taxes,grandTotal);
-        return thankYou;
+          "\n\t\t\t\tTaxes: \t\t %.2f \n\t\t\t\tGrand Total: \t%.2f\n%s",
+                grandTotalOfDiscount,subtotal,taxes,grandTotal, thankYou);
+        
     }
 }

@@ -61,6 +61,7 @@ public class POSRegister {
      * This methods calls the receipt to generate the console printed receipt.
      */
     public final void generateConsoleReceipt(){
-        receipt.getConsoleReceipt();
+//        receipt.getConsoleReceipt();
+        receipt.outputConsoleReceiptStrategy();
     }
 }    

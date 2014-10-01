@@ -12,6 +12,7 @@ package pointofsale;
  */
 public interface ReceiptStrategy {
     
-    public abstract String getReceipt();
+    public abstract void generateReceipt(Customer customer, LineItem [] lineItems, 
+            int receiptNumber);
     
 }
