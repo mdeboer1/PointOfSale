@@ -9,7 +9,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- *Not a used class as of this version
+ * This class generates a receipt that is output to the console, and is an 
+ * implementation of the ReceiptStrategy interface.
  * @author mdeboer1
  * @version 1.00
  */
@@ -22,10 +23,17 @@ public class ConsoleReceiptStrategy implements ReceiptStrategy {
     private double taxes = .051;
     private double taxAmount;
     private double grandTotal;
-    private String customerNumber;
     
+    /**
+     * This class outputs a finalized receipt to the console.
+     * @param customer - object passed to access customer information, is not 
+     * stored locally in this class.
+     * @param lineItems - array of all the lineItem objects, is not stored locally
+     * in this class.
+     * @param receiptNumber - receiptNumber passed to add to the receipt.
+     */
     @Override
-    public void generateReceipt(Customer customer, LineItem [] lineItems, int receiptNumber) {
+    public final void generateReceipt(Customer customer, LineItem [] lineItems, int receiptNumber) {
         Calendar currentDate = Calendar.getInstance(); //Get the current date
         SimpleDateFormat formatter= new SimpleDateFormat("MMM dd yyyy HH:mm:ss"); //format it as per your requirement
         String getTodaysDate = formatter.format(currentDate.getTime());
@@ -35,7 +43,7 @@ public class ConsoleReceiptStrategy implements ReceiptStrategy {
             if (i == 0){
                 grandTotalOfDiscount += lineItems[i].getAmountSavedPerLine();
                 subtotal += lineItems[i].getExtendedPrice();
-                System.out.println("Customer Number: " + customerNumber +
+                System.out.println("Customer Number: " + customer.getCustomerNumber() +
                         "\n---------------------------------------------------------------\n");
                 System.out.printf("%s \t %s \t %d \t %.2f \t %.2f \t %.2f \n", lineItems[i].getProductNumber(),
                         lineItems[i].getProductDescription(), lineItems[i].getQuantity(),
