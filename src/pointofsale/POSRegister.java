@@ -13,7 +13,7 @@ package pointofsale;
  * @version 1.00
  */
 public class POSRegister {
-    private ReceiptStrategy receipt;
+    private Receipt receipt;
     
     /**
      * Constructor for POSRegister class, creates a Receipt object.
@@ -31,7 +31,7 @@ public class POSRegister {
                     "error: Quantity must be a least one and productID and custemer"
                             + "number must be Strings");
         }
-        this.receipt = new ConsoleReceiptStrategy(quantity, productID, customerNumber); 
+        this.receipt = new Receipt(quantity, productID, customerNumber); 
     }
     
     /**
@@ -61,6 +61,6 @@ public class POSRegister {
      * This methods calls the receipt to generate the console printed receipt.
      */
     public final void generateConsoleReceipt(){
-        receipt.getReceipt();
+        receipt.getConsoleReceipt();
     }
 }    

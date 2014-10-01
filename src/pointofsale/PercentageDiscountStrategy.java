@@ -26,7 +26,7 @@ public class PercentageDiscountStrategy implements DiscountStrategy{
     /**
      * This is a custom constructor that allows the discount amount to be overridden
      * if necessary when PercentageDiscountStrategy object is created.
-     * @param discountAmount
+     * @param discountAmount - stores discount amount
      */
     public PercentageDiscountStrategy(double discountAmount){
         setDiscountAmount(discountAmount);
@@ -39,10 +39,10 @@ public class PercentageDiscountStrategy implements DiscountStrategy{
     /**
      * This is the overridden method from DiscountStrategy.  It returns the 
      * discount amount.
-     * @return 
+     * @return - returns discountAmount
      */
     @Override
-    public double getDiscountAmount() {
+    public final double getDiscountAmount() {
         return discountAmount;
     }
     
