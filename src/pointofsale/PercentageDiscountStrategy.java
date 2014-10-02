@@ -33,6 +33,10 @@ public class PercentageDiscountStrategy implements DiscountStrategy{
     }
 
     private void setDiscountAmount(double discountAmount) {
+        if(discountAmount < 0){
+            throw new IllegalArgumentException(
+                    GlobalConstants.DISCOUNT_AMOUNT_WARNING_MESSAGE);
+        }
         this.discountAmount = discountAmount;
     }
 

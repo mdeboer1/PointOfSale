@@ -26,5 +26,4 @@ public class Startup {
         register2.addNewLineItem(1, "00003");
         register2.generateConsoleReceipt();
     }
-    //check magic numbers and strings
 }

@@ -20,4 +20,5 @@ public class GlobalConstants {
     public static final String RECEIPT_NUMBER_WARNING_MESSAGE = "error: receiptNumber must be greater than zero";
     public static final String QUANTITY_WARNING_MESSAGE = "error: quantity must not be less than zero";
     public static final String RECEIPT_OBJECT_WARNING_MESSAGE = "error: receipt strategy cannot be null";
+    public static final String DISCOUNT_AMOUNT_WARNING_MESSAGE = "error: discount amount must be greater than 0";
 }
