@@ -6,20 +6,22 @@
 package pointofsale;
 
 /**
- *
+ * This is the startup class to test and run the POS project.
  * @author mdeboer1
  * @version 1.00
- * This is the startup class to test and run the POS project.
+ * 
  */
 public class Startup {
     
     public static void main(String[] args) {
-//        POSRegister register = new POSRegister(1, "00004", "3", new FakeDatabase(),newConsoleReceiptStrategy());
-        POSRegister register = new POSRegister(1, "00004", "3", new ConsoleReceiptStrategy());
+
+        POSRegister register = new POSRegister(1, "00004", "3", 
+                new ConsoleReceiptStrategy(), new FakeDatabase());
         register.addNewLineItem(1, "00002");
         register.generateConsoleReceipt();
         
-        POSRegister register2 = new POSRegister(1, "00001", "2", new ConsoleReceiptStrategy());
+        POSRegister register2 = new POSRegister(1, "00001", "2", 
+                new ConsoleReceiptStrategy(), new FakeDatabase());
         register2.addNewLineItem(1, "00002");
         register2.addNewLineItem(1, "00003");
         register2.generateConsoleReceipt();

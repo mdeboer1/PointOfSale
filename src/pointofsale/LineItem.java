@@ -22,6 +22,14 @@ public class LineItem {
      * @param quantity - Contains the quantity.
      */
     public LineItem(Product product, int quantity){
+        if (product == null){
+            throw new IllegalArgumentException(
+                    GlobalConstants.DISCOUNT_TYPE_WARNING_MESSAGE);
+        }
+        if (quantity < 0){
+            throw new IllegalArgumentException(
+                    GlobalConstants.QUANTITY_WARNING_MESSAGE);
+        }
         this.product = product;
         setQuantity(quantity);
 //        setProductNumber(product.getProductCode());
@@ -55,11 +63,15 @@ public class LineItem {
         return amountSavedPerLineItem;
     }
     
+    /**
+     * This class sets the amount saved per line.  If the discount amount is
+     * less than one, calculates as a percentage, else calculates a flat rate amount
+     */
     private void setAmountSavedPerLine(){
         if (product.getDiscountAmount() < 1){
             amountSavedPerLineItem = quantity * (product.getDiscountAmount() * product.getPrice());
         }
-        else if (product.getDiscountAmount() > 1){
+        else {
             amountSavedPerLineItem = quantity * getDiscountAmount();
         }
     }    
@@ -71,11 +83,19 @@ public class LineItem {
     public final double getProductPrice(){
         return product.getPrice();
     }
-
+    
+    /**
+     * Methods allows for the quantity to be adjusted if needed.  Quantity must be
+     * above zero!  This method could be used to zero out a quantity that a customer
+     * decides not to buy!  This method would not be used to return an item, as
+     * it rejects less than zero quantities.
+     * 
+     * @param quantity - stores the quantity of the lineItem.
+     */
     private void setQuantity(int quantity){
-        if(quantity < 1){
+        if(quantity < 0){
             throw new IllegalArgumentException(
-                    "error: quantity must be at least 1");
+                    GlobalConstants.QUANTITY_WARNING_MESSAGE);
         }
         this.quantity = quantity;
     }

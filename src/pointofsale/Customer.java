@@ -26,7 +26,7 @@ public class Customer {
     private void setCustomerNumber(String customerNumber) {
         if (customerNumber == null || customerNumber.equals(" ")){
             throw new IllegalArgumentException(
-                    "error: custemer number must be a valid String");
+                    GlobalConstants.CUSTOMER_NUMBER_WARNING_MESSAGE);
         }
         this.customerNumber = customerNumber;
     }
@@ -39,7 +39,7 @@ public class Customer {
     public final void addReceiptToHistory(int receiptNumber){
         if (receiptNumber <= 0){
             throw new IllegalArgumentException(
-                "error: receiptNumber must be greater than zero");
+                GlobalConstants.RECEIPT_NUMBER_WARNING_MESSAGE);
         }
         int [] tempArray = new int[receiptHistory.length + 1];
         System.arraycopy(receiptHistory, 0, tempArray, 0, receiptHistory.length);

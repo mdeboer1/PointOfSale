@@ -32,6 +32,7 @@ public class Receipt {
     private Customer customer;
     private ReceiptStrategy receiptStrategy;
     
+    
     /**
      * Constructor for creating a receipt.  Takes all the information in the 
      * constructor and creates the first line item.  Subsequent line items created
@@ -39,19 +40,27 @@ public class Receipt {
      * @param quantity - Contains the quantity of items passed from POSRegister.
      * @param productID - Contains the product ID of the items passed from POSRegister.
      * @param customerNumber - Contains the customer number passed from POSRegister
-     * @param receiptStrategy - object of the Receipt Strategy
+     * @param receiptStrategy - object of the ReceiptStrategy
+     * @param database - object of the DatabaseStrategy
      */
-    public Receipt(int quantity, String productID, String customerNumber, ReceiptStrategy receiptStrategy){
-        if (quantity < 1 || productID == null || productID.equals(" ") || customerNumber == null 
-                || customerNumber.equals(" ")){
+    public Receipt(int quantity, String productID, String customerNumber, ReceiptStrategy receiptStrategy,
+            DatabaseStrategy database){
+        if (quantity < 1 ){
             throw new IllegalArgumentException(
-                    "error: Quantity must be a least one and productID and custemer"
-                            + "number must be Strings");
+                    GlobalConstants.QUANTITY_WARNING_MESSAGE);
+        }
+        else if (customerNumber == null || customerNumber.equals(" ")){
+            throw new IllegalArgumentException(
+                    GlobalConstants.CUSTOMER_NUMBER_WARNING_MESSAGE);
+        }
+        else if (productID == null || productID.equals(" ")){
+            throw new IllegalArgumentException(
+                    GlobalConstants.PRODUCT_NUMBER_WARNING_MESSAGE);
         }
         this.receiptStrategy = receiptStrategy;
         receiptNumber = receiptNumberIncrementer;
         receiptNumberIncrementer++;
-        database = new FakeDataBase();
+        this.database = database;
         customer = database.getCustomerInformation(customerNumber);
         customer.addReceiptToHistory(receiptNumber);
         lineItem = new LineItem(database.getProductInformation(productID), quantity);
@@ -81,10 +90,6 @@ public class Receipt {
      * @param productID - Contains the product ID of the items passed from POSRegister.
      */
     public final void addNewLineItem(int quantity, String productID){
-        if (lineItem == null){
-            throw new IllegalArgumentException(
-                    "error: lineItem cannot be null");
-        }
         lineItem = new LineItem(database.getProductInformation(productID), quantity);
         LineItem [] tempArray = new LineItem[lineItems.length + 1];
         System.arraycopy(lineItems, 0, tempArray, 0, lineItems.length);

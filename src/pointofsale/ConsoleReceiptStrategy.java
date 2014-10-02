@@ -44,6 +44,10 @@ public class ConsoleReceiptStrategy implements ReceiptStrategy {
         System.out.println(storeName + "\n" + "Date: " + getTodaysDate + 
                 "\nReceipt Number: " + receiptNumber);
         for (int i = 0; i <= lineItems.length - 1; i++){
+            /*Checks to see if this is the first lineItem in the array, so this only prints once
+            * and the number zero will never change since first index of an array
+            * is 0 and we only check to see if it is the first index.
+            */
             if (i == 0){
                 grandTotalOfDiscount += lineItems[i].getAmountSavedPerLine();
                 subtotal += lineItems[i].getExtendedPrice();
@@ -53,7 +57,7 @@ public class ConsoleReceiptStrategy implements ReceiptStrategy {
                         lineItems[i].getProductDescription(), lineItems[i].getQuantity(),
                         lineItems[i].getProductPrice(), lineItems[i].getAmountSavedPerLine(), lineItems[i].getExtendedPrice());
             }
-            if (i > 0 && (!(i > lineItems.length - 1))){
+            else {
                 grandTotalOfDiscount += lineItems[i].getAmountSavedPerLine();
                 subtotal += lineItems[i].getExtendedPrice();
                 System.out.printf("%s \t %s \t %d \t %.2f \t %.2f \t %.2f \n", lineItems[i].getProductNumber(),

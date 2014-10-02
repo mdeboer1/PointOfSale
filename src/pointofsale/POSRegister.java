@@ -23,16 +23,27 @@ public class POSRegister {
      * Receipt constructor.
      * @param customerNumber - Contains customerNumber received from Startup class, passes it to
      * Receipt constructor. 
+     * @param receiptStrategy - ReceiptStrategy object
      */
     public POSRegister(int quantity, String productID, String customerNumber,
-            ReceiptStrategy receiptStrategy){ //take custNum as argument, send to Receipt constructor
-        if (quantity < 1 || productID == null || productID.equals(" ") || customerNumber == null 
-                || customerNumber.equals(" ")){
+            ReceiptStrategy receiptStrategy, DatabaseStrategy database){ 
+        if (quantity < 1 ){
             throw new IllegalArgumentException(
-                    "error: Quantity must be a least one and productID and custemer"
-                            + "number must be Strings");
+                    GlobalConstants.QUANTITY_WARNING_MESSAGE);
         }
-        this.receipt = new Receipt(quantity, productID, customerNumber, receiptStrategy); 
+        else if (customerNumber == null || customerNumber.equals(" ")){
+            throw new IllegalArgumentException(
+                    GlobalConstants.CUSTOMER_NUMBER_WARNING_MESSAGE);
+        }
+        else if (productID == null || productID.equals(" ")){
+            throw new IllegalArgumentException(
+                    GlobalConstants.PRODUCT_NUMBER_WARNING_MESSAGE);
+        }
+        else if (receiptStrategy == null){
+            throw new IllegalArgumentException(
+                    GlobalConstants.RECEIPT_OBJECT_WARNING_MESSAGE);
+        }
+        this.receipt = new Receipt(quantity, productID, customerNumber, receiptStrategy, database); 
     }
     
     /**

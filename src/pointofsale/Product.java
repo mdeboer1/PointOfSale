@@ -27,15 +27,15 @@ public class Product {
     public Product(String description, String productCode, double price){
         if (description == null || description.equals(" ")){
              throw new IllegalArgumentException(
-                    "error: description must be a valid string");
+                    GlobalConstants.PRODUCT_DESCRIPTION_WARNING_MESSAGE);
         }
         if (productCode == null || productCode.equals(" ")){
             throw new IllegalArgumentException(
-                    "error: product code must be a valid string");
+                    GlobalConstants.PRODUCT_NUMBER_WARNING_MESSAGE);
         }
-        else if (price <=0 ){
+        else if (price <= GlobalConstants.MINIMUM_PRICE_ALLOWED ){
             throw new IllegalArgumentException(
-                    "error: price must be greater than zero");
+                    GlobalConstants.PRICE_AMOUNT_WARNING_MESSAGE);
         }
         setProductDescription(description);
         setProductCode(productCode);
@@ -54,19 +54,19 @@ public class Product {
     public Product(String description, String productCode, double price, DiscountStrategy discount){
         if (description == null || description.equals(" ")){
              throw new IllegalArgumentException(
-                    "error: description must be a valid string");
+                    GlobalConstants.PRODUCT_DESCRIPTION_WARNING_MESSAGE);
         }
         if (productCode == null || productCode.equals(" ")){
             throw new IllegalArgumentException(
-                    "error: product code must be a valid string");
+                    GlobalConstants.PRODUCT_NUMBER_WARNING_MESSAGE);
         }
-        else if (price <=0 ){
+        else if (price <= GlobalConstants.MINIMUM_PRICE_ALLOWED ){
             throw new IllegalArgumentException(
-                    "error: price must be greater than zero");
+                    GlobalConstants.PRICE_AMOUNT_WARNING_MESSAGE);
         }
         if (discount == null){
             throw new IllegalArgumentException(
-                    "error: discount type is required and cannot be null");
+                    GlobalConstants.DISCOUNT_TYPE_WARNING_MESSAGE);
         }
         setProductDescription(description);
         setProductCode(productCode);
@@ -83,11 +83,9 @@ public class Product {
 
     private void setProductDescription(String productDescription) {
         if (productDescription == null || productDescription.equals(" ")){
-            if (productDescription == null || productDescription.equals(" ")){
             throw new IllegalArgumentException(
-                    "error: product description must be a valid String");
-            }
-        }
+                    GlobalConstants.PRODUCT_DESCRIPTION_WARNING_MESSAGE);
+       }
         this.productDescription = productDescription;
     }
     
@@ -101,10 +99,8 @@ public class Product {
 
     private void setProductCode(String productCode) {
         if (productCode == null || productCode.equals(" ")){
-            if (productCode == null || productCode.equals(" ")){
             throw new IllegalArgumentException(
-                    "error: product description must be a valid String");
-            }
+                    GlobalConstants.PRODUCT_NUMBER_WARNING_MESSAGE);
         }
         this.productCode = productCode;
     }
@@ -114,18 +110,18 @@ public class Product {
     }
 
     private void setPrice(double price) {
-        if (price <= 0){
+        if (price <= GlobalConstants.MINIMUM_PRICE_ALLOWED){
             throw new IllegalArgumentException(
-                    "error: price must be greater than zero");
+                    GlobalConstants.PRICE_AMOUNT_WARNING_MESSAGE);
         }
         this.price = price;
     }
     
     /**
      * returns the discount amount.  tempVar parameter used to locally store
-     * the discount amount
-     * 
-     * @return 
+     * the discount amount so it can be returned to calling class.
+     *  @return - returns the discount amount (in dollars or percentage
+     * depending on the DiscountStrategy type being used (if any)!
      */
     public final double getDiscountAmount() {
         double tempVar;
