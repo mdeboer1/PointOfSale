@@ -32,11 +32,7 @@ public class LineItem {
         }
         this.product = product;
         setQuantity(quantity);
-//        setProductNumber(product.getProductCode());
-//        setProductDescription(product.getProductDescription());
-//        setDiscountAmount(product.getDiscountAmount());
         setQuantity(quantity);
-//        setPrice(product.getPrice());
         setAmountSavedPerLine();
         setExtendedPrice();
         

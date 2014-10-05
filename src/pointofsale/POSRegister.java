@@ -13,7 +13,7 @@ package pointofsale;
  * @version 1.00
  */
 public class POSRegister {
-    private Receipt receipt;
+    private final Receipt receipt;
     
     /**
      * Constructor for POSRegister class, creates a Receipt object.
@@ -24,6 +24,7 @@ public class POSRegister {
      * @param customerNumber - Contains customerNumber received from Startup class, passes it to
      * Receipt constructor. 
      * @param receiptStrategy - ReceiptStrategy object
+     * @param database - A database object
      */
     public POSRegister(int quantity, String productID, String customerNumber,
             ReceiptStrategy receiptStrategy, DatabaseStrategy database){ 

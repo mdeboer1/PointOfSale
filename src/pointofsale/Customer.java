@@ -19,7 +19,7 @@ public class Customer {
         setCustomerNumber(customerNumber);
     }
 
-    public String getCustomerNumber() {
+    public final String getCustomerNumber() {
         return customerNumber;
     }
 

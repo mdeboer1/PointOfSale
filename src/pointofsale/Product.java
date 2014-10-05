@@ -77,7 +77,7 @@ public class Product {
      * Returns the description of the product
      * @return 
      */
-    public String getProductDescription() {
+    public final String getProductDescription() {
         return productDescription;
     }
 

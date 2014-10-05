@@ -7,7 +7,7 @@
 package pointofsale;
 
 /**
- *
+ * This is a class of global variables used for validation error messages.
  * @author mdeboer1
  */
 public class GlobalConstants {
